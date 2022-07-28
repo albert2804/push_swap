@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 15:14:00 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:48:17 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,43 @@ int *pivotvalues(t_status *stats)
 }
 
 /*
-single pivotisation
+checks if the current index and descending values fromt that index
+in Stack B are pushable. If Yes the function returns 1.
+Else Stack B has to be rotated, until check for push returns 1.
 */
-void pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
+int check_for_push(t_list_ps *lst_b)
 {
-	int count_lsta;
-	int len_lsta;
+	int max_index;
+	int flag;
 
-	count_lsta = 0;
-	len_lsta = list_count(*lst_a);
-	while(count_lsta < len_lsta)
+	max_index = find_max_index(lst_b);
+	flag = count_descending_max_values(lst_b);
+	if (flag != 0 || lst_b->index == max_index)
+		return (1);
+	return (0);
+}
+
+void push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, t_status *stats)
+{
+	int i;
+	
+	i = 0;
+	while (i <= stats->count_max_val)
 	{
-		if ((*lst_a)->index >= stats->piv1 && (*lst_a)->index <= stats->piv2)
-			{
-			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
-			if ((*lst_b)->next && (*lst_b)->next->index - (*lst_b)->index == -1)
-				stats->opcount = stats->opcount + swap_b(lst_b, stats->print_flag);
-			}
-		else if ((*lst_a)->index < stats->piv1)
-			{
-			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
-			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
-			}
-		else
+		if ((*lst_b)->index == max_val[i])
+		{
+			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
 			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
-		count_lsta ++;
+			i++;
+		}
+		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 1)
+			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
+		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 0)
+			stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
+	}
+	if (i > 1)
+	{
+		while (--i > -1)
+			stats->opcount = stats->opcount + rotate_rev_a(lst_a, stats->print_flag);
 	}
 }

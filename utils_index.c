@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:54:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 12:59:55 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:52:01 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,31 +79,41 @@ t_list_ps *index_list(t_list_ps *lst)
 	return (lst);
 }
 
-/*
-this function shall find the 2 elemets in which the "inserted element" index fits
-*/
-int *find_edge_elements(t_list_ps *lst_a, int inserted_elem)
-{
-	t_list_ps *temp;
-	int *pos;
+// /*
+// this function shall find the 2 elemets in which the "inserted element" index fits
+// */
+// int *find_edge_elements(t_list_ps *lst_a, int inserted_elem)
+// {
+// 	t_list_ps *temp;
+// 	int *pos;
 
-	pos = malloc(sizeof(int) * 2);
-	pos[0] = 0;
-	pos[1] = 0;
-	temp = lst_a;
-	//ft_printf("Inserted: %d\n", inserted_elem);
-	while (temp->next != NULL)
+// 	pos = malloc(sizeof(int) * 2);
+// 	pos[0] = 0;
+// 	pos[1] = 0;
+// 	temp = lst_a;
+// 	while (temp->next != NULL)
+// 	{
+// 		if (inserted_elem > temp->index && inserted_elem < temp->next->index)
+// 		{
+// 			pos[0] = temp->index;
+// 			pos[1] = temp->next->index;
+// 			return(pos);
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	return (pos);
+// }
+
+int find_max_index(t_list_ps *lst_b)
+{
+	int value;
+
+	value = 0;
+	while (lst_b)
 	{
-		// ft_printf("%d\n", temp->index);
-		// ft_printf("%d\n", temp->next->index);
-		// ft_printf("************\n");
-		if (inserted_elem > temp->index && inserted_elem < temp->next->index)
-		{
-			pos[0] = temp->index;
-			pos[1] = temp->next->index;
-			return(pos);
-		}
-		temp = temp->next;
+		if (lst_b->index > value)
+			value = lst_b->index;
+		lst_b = lst_b->next;
 	}
-	return (pos);
+	return (value);
 }

@@ -6,180 +6,39 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 18:34:59 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:48:27 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <stdio.h>
 
-int find_max_index(t_list_ps *lst_b)
-{
-	int value;
-
-	value = 0;
-	while (lst_b)
-	{
-		if (lst_b->index > value)
-			value = lst_b->index;
-		lst_b = lst_b->next;
-	}
-	return (value);
-}
-
 /*
-counts the indexes in descending order from max_index on, until max_index is found.
-i.e. index_max -> index_max - 1 -> index_max - 2, ...
-Returns the count of the found elements.
-Needed to get the proper malloc size of the array max_values in
-function descending_max_values
+single pivotisation
 */
-
-int count_descending_max_values(t_list_ps *lst_b)
+void pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
-	int count;
-	int compare_value;
+	int count_lsta;
+	int len_lsta;
 
-	compare_value = lst_b->index;
-	count = 0;
-	while (1)
+	count_lsta = 0;
+	len_lsta = list_count(*lst_a);
+	while(count_lsta < len_lsta)
 	{
-		if (lst_b->index - compare_value == 1)
-		{
-			compare_value = lst_b->index;
-			count++;
-		}
-		else if (lst_b->index - compare_value > 1)
-		{
-			count = 0;
-			compare_value = lst_b->index;
-		}
-		if (lst_b->index == find_max_index(lst_b))
-			return (count);
-		lst_b = lst_b->next;
-	}
-	return (count);
-}
-
-/*
-this function is used for building the max_values array.
-Kind of sourcing out bc of norminette
-*/
-int *build_max_values(int *max_values, int compare_value, t_list_ps *lst_b)
-{
-	int i;
-
-	i = 0;
-	while (1)
-	{
-		if (lst_b->index - compare_value == 1)
-		{
-			max_values[i] = compare_value;
-			compare_value = lst_b->index;
-			i++;
-		}
-		else if (lst_b->index - compare_value > 1)
-		{
-			compare_value = lst_b->index;
-			i = 0;
-		}
-		if (lst_b->index == find_max_index(lst_b))
-		{
-			max_values[i] = find_max_index(lst_b);
-			return (max_values);
-		}
-		lst_b = lst_b->next;
-	}
-}
-/*
-looks for indexes in descending order from max_index on, until max_index is found.
-i.e. index_max -> index_max - 1 -> index_max - 2, ...
-Returns the index values of the found elements.
-Goal is to push the values into stack A, so Stack B has to be rotated less.
-*/
-int *descending_max_values(t_list_ps *lst_b)
-{
-	int count_max_values;
-	int compare_value;
-	int *max_values;
-
-	count_max_values = count_descending_max_values(lst_b);
-	max_values = ft_calloc(count_max_values + 1, sizeof(int));
-	if (count_max_values == 0)
-	{
-		max_values[0] = find_max_index(lst_b);
-		return (max_values);
-	}
-	else
-	{
-		compare_value = lst_b->index;
-		max_values = build_max_values(max_values, compare_value, lst_b);
-		return (max_values);
-	}
-}
-
-/*
-checks if the current index and descending values fromt that index
-in Stack B are pushable. If Yes the function returns 1.
-Else Stack B has to be rotated, until check for push returns 1.
-*/
-int check_for_push(t_list_ps *lst_b)
-{
-	int max_index;
-	int flag;
-
-	max_index = find_max_index(lst_b);
-	flag = count_descending_max_values(lst_b);
-	if (flag != 0 || lst_b->index == max_index)
-		return (1);
-	return (0);
-}
-
-/*
-checks if lst should be rotated or reverse_rotated.
-if 1 that means reverse_rotating
-0 means rotating list is better.
-*/
-int rotate_or_rrotate(t_list_ps *lst_b, int index)
-{
-	int count;
-	int lcount;
-
-	count = 0;
-	lcount = list_count(lst_b);
-	while(lst_b->index != index)
-	{
-		lst_b = lst_b->next;
-		count ++;
-	}
-	if (count > lcount/2)
-		return (0); 
-	else
-		return (1);
-}
-
-void push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, t_status *stats)
-{
-	int i;
-	
-	i = 0;
-	while (i <= stats->count_max_val)
-	{
-		if ((*lst_b)->index == max_val[i])
-		{
-			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
-			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
-			i++;
-		}
-		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 1)
+		if ((*lst_a)->index >= stats->piv1 && (*lst_a)->index <= stats->piv2)
+			{
+			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
+			if ((*lst_b)->next && (*lst_b)->next->index - (*lst_b)->index == -1)
+				stats->opcount = stats->opcount + swap_b(lst_b, stats->print_flag);
+			}
+		else if ((*lst_a)->index < stats->piv1)
+			{
+			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
 			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
-		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 0)
-			stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
-	}
-	if (i > 1)
-	{
-		while (--i > -1)
-			stats->opcount = stats->opcount + rotate_rev_a(lst_a, stats->print_flag);
+			}
+		else
+			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
+		count_lsta ++;
 	}
 }
 
@@ -216,7 +75,6 @@ void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	pivot_array = pivotvalues(stats);
 	check = 0;
 	index_lsta = list_count(*lst_a);
-	// single pivot//
 	while (i < stats->pivot_count)
 	{
 		stats->piv1 = pivot_array[i];
