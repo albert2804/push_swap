@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/06/08 17:11:28 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:50:26 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
 void	ft_bzero(void	*s, size_t	n);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
