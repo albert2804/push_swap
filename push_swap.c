@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 15:48:38 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:08:18 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,14 +189,14 @@ int push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, int c_val, i
 	return (op_count);
 }
 
-int sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, int pivot, int print_flag)
+int sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
 {
 	int *max_values;
 	int op_count;
 	int count_max_val;
 
 	op_count = 0;
-	while (find_max_index(*lst_b) > pivot)
+	while (find_max_index(*lst_b) > 1)
 	{
 		count_max_val = count_descending_max_values(*lst_b);
 		max_values = descending_max_values(*lst_b);
@@ -239,6 +239,7 @@ void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	stats->piv1 = pivot_array[i + 1];
 	stats->piv2 = index_lsta;
 	pivotisation(lst_a, lst_b, stats);
+	sortPivotgroup(lst_a, lst_b, stats->print_flag);
 }
 
 int main(int argc, char **argv)
