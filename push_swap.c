@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 16:08:18 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:34:59 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,62 +158,51 @@ int rotate_or_rrotate(t_list_ps *lst_b, int index)
 		return (1);
 }
 
-int push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, int c_val, int print_flag)
+void push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, t_status *stats)
 {
 	int i;
-	int op_count;
-
-	op_count = 0;
+	
 	i = 0;
-	while (i <= c_val)
+	while (i <= stats->count_max_val)
 	{
 		if ((*lst_b)->index == max_val[i])
 		{
-			op_count = op_count + push_a(lst_a, lst_b, print_flag);
-			op_count = op_count + rotate_a(lst_a, print_flag);
+			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
+			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
 			i++;
 		}
 		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 1)
-			op_count = op_count + rotate_b(lst_b, print_flag);
+			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
 		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 0)
-			op_count = op_count + rotate_rev_b(lst_b, print_flag);
+			stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
 	}
 	if (i > 1)
 	{
-		while (i > 0)
-		{
-			op_count = op_count + rotate_rev_a(lst_a, print_flag);
-			i--;
-		}
+		while (--i > -1)
+			stats->opcount = stats->opcount + rotate_rev_a(lst_a, stats->print_flag);
 	}
-	return (op_count);
 }
 
-int sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
+void sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
 	int *max_values;
-	int op_count;
-	int count_max_val;
-
-	op_count = 0;
 	while (find_max_index(*lst_b) > 1)
 	{
-		count_max_val = count_descending_max_values(*lst_b);
+		stats->count_max_val = count_descending_max_values(*lst_b);
 		max_values = descending_max_values(*lst_b);
 		if (check_for_push(*lst_b) == 0)
 		{
 			if (rotate_or_rrotate(*lst_b, max_values[0]) == 1)
-					op_count = op_count + rotate_b(lst_b, print_flag);
+					stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
 			else if (rotate_or_rrotate(*lst_b, max_values[0]) == 0)
-					op_count = op_count + rotate_rev_b(lst_b, print_flag);
+					stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
 		}
-		else if (check_for_push(*lst_b) == 1 && count_max_val == 0)
-			op_count = op_count + push_a(lst_a, lst_b, print_flag);
-		else if (check_for_push(*lst_b) == 1 && count_max_val > 0)
-			op_count = op_count + push_values(lst_a, lst_b, max_values, count_max_val, print_flag);
+		else if (check_for_push(*lst_b) == 1 && stats->count_max_val == 0)
+			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
+		else if (check_for_push(*lst_b) == 1 && stats->count_max_val > 0)
+			push_values(lst_a, lst_b, max_values, stats);
 		free(max_values);
 	}
-	return (op_count);
 }
 
 void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
@@ -239,7 +228,7 @@ void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	stats->piv1 = pivot_array[i + 1];
 	stats->piv2 = index_lsta;
 	pivotisation(lst_a, lst_b, stats);
-	sortPivotgroup(lst_a, lst_b, stats->print_flag);
+	sortPivotgroup(lst_a, lst_b, stats);
 }
 
 int main(int argc, char **argv)
@@ -293,12 +282,12 @@ int main(int argc, char **argv)
 		stats = init_struct(lst_a);
 		stats->pivot_count = i;
 		stats->print_flag = 1;
-		print_status(stats);
 		sort(&lst_a, &lst_b, stats);
+		
+		print_status(stats);
 		free (stats);
 	// 	i ++;
 	// }
-	// ft_printf("\n%d, %d, %d, %d\n", pivotelements[0], pivotelements[1], pivotelements[2], pivotelements[3]);
 
 	return (0);
 

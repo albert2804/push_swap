@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 16:07:47 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:25:16 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_status
 	int opcount;
 	int piv1;
 	int piv2;
-	int max_val_count;
+	int count_max_val;
 }					t_status;
 
 t_list_ps	*build_stack_A1(char *str);
@@ -67,8 +67,8 @@ int			*build_max_values(int *max_values, int compare_value, t_list_ps *lst_b);
 int			*descending_max_values(t_list_ps *lst_b);
 int			check_for_push(t_list_ps *lst_b);
 int			rotate_or_rrotate(t_list_ps *lst_b, int index);
-int			push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, int c_val, int print_flag);
-int			sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
+void		sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
+void		push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, t_status *stats);
 
 void		sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
 int 		*pivotvalues(t_status *stats);
