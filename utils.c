@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/06/17 14:29:30 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:58:33 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,33 @@ int sort_check(t_list_ps *lst_a)
 	return (1);
 }
 
+void print_status(t_status *stats)
+{
+	ft_printf("List A Count: %d\n", stats->lista_count);
+	ft_printf("Pivot Count: %d\n", stats->pivot_count);
+	ft_printf("Operations Count: %d\n", stats->opcount);
+	ft_printf("PrintFlag: %d\n", stats->print_flag);
+}
+
+// t_status init_struct(t_list_ps *lst_a)
+// {
+// 	t_status stats;
+
+// 	stats.lista_count = list_count(lst_a);
+// 	stats.pivot_count = 15;
+// 	stats.opcount = 0;
+// 	stats.print_flag = 0;
+// 	return (stats);
+// }
+
+t_status *init_struct(t_list_ps *lst_a)
+{
+	t_status *stats;
+	
+	stats = malloc(sizeof(t_status));
+	stats->lista_count = list_count(lst_a);
+	stats->pivot_count = 15;
+	stats->opcount = 0;
+	stats->print_flag = 0;
+	return (stats);
+}

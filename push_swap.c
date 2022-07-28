@@ -6,13 +6,12 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 12:52:24 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:11:50 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <stdio.h>
-
 
 int find_max_index(t_list_ps *lst_b)
 {
@@ -35,8 +34,6 @@ Returns the count of the found elements.
 Needed to get the proper malloc size of the array max_values in
 function descending_max_values
 */
-
-
 
 int count_descending_max_values(t_list_ps *lst_b)
 {
@@ -219,47 +216,28 @@ int sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, int pivot, int print_fl
 	return (op_count);
 }
 
-void sort(t_list_ps **lst_a, t_list_ps **lst_b, int pivot_count)
+void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
 	int check;
 	int index_lsta;
 	int *pivot_array;
-	int op_count;
-	int print_flag;
 	int i;
 
-	print_flag = 0;
 	i = 0;
-	op_count = 0;
-	pivot_array = pivotvalues(list_count(*lst_a), pivot_count);
-	index_lsta = list_count(*lst_a);
+	pivot_array = pivotvalues(stats);
 	check = 0;
-	
+	index_lsta = list_count(*lst_a);
+	// stats->piv1 = pivot_array[i];
+	// stats->piv2 = pivot_array[i + 1];
 	// single pivot//
-	while (i < pivot_count)
+	while (i < stats->pivot_count)
 	{
-		op_count = op_count + pivotisation(lst_a, lst_b, pivot_array[i], pivot_array[i + 1], print_flag);
+		pivotisation(lst_a, lst_b, pivot_array[i], pivot_array[i + 1], stats);
 		i = i + 2; // use this to pivot the stack mirrored
 		//i++; // use this to pivot the stack descending
 	}
-	op_count = op_count + pivotisation(lst_a, lst_b, pivot_array[i], index_lsta, print_flag);
-	op_count = op_count + sortPivotgroup(lst_a, lst_b, 1, print_flag);
-	ft_printf("OPCOUNT: %d\n", op_count);
-	// int *j5 = descending_max_values(*lst_b);
-	// ft_printf("MAX_VAL: %d\n", j5[0]);
-	// int max_index = find_max_index(*lst_b);
-	// ft_printf("MAX_IDX: %d\n", max_index);
-	// int m5 = rotate_or_rrotate(*lst_b, j5[0]);
-	// ft_printf("Rotate: %d\n", m5);
-	// int k5 = count_descending_max_values(*lst_b);
-	// ft_printf("COUNT: %d\n", k5);
-	// int l5 = check_for_push(*lst_b);
-	// ft_printf("Check: %d\n", l5);
-	// printIndex(*lst_b);
-	
-	
-	
-
+	pivotisation(lst_a, lst_b, pivot_array[i], index_lsta, stats);
+	//sortPivotgroup(lst_a, lst_b, 1, print_flag);
 }
 
 int main(int argc, char **argv)
@@ -267,12 +245,13 @@ int main(int argc, char **argv)
 	t_list_ps *lst_b;
 	t_list_ps *lst_a;
 	int i_argc;
-	int pivot_count;
+	int max_pivot_count;
 	int list_nbr;
 	int i;
+	t_status *stats;
 	
 	i_argc = argc;
-	pivot_count = 30;
+	max_pivot_count = 30;
 	i = 10;
 	// lst_a = build_stack_A1(argv[1]);
 
@@ -299,7 +278,7 @@ int main(int argc, char **argv)
 
 	// int *pivotelements;
 
-	while (i < pivot_count)
+	while (i < max_pivot_count)
 	{
 		lst_a = build_stack_A2(argv);
 		lst_a = index_list(lst_a);
@@ -308,8 +287,13 @@ int main(int argc, char **argv)
 		// pivotelements = pivotvalues(list_nbr);
 		lst_a = index_list(lst_a);
 		lst_b = NULL;
-		sort(&lst_a, &lst_b, i);
+		// stats = init_struct(lst_a);
+		stats = init_struct(lst_a);
+		stats->pivot_count = i;
+		print_status(stats);
+		sort(&lst_a, &lst_b, stats);
 		i ++;
+		free (stats);
 	}
 	// ft_printf("\n%d, %d, %d, %d\n", pivotelements[0], pivotelements[1], pivotelements[2], pivotelements[3]);
 
@@ -317,3 +301,4 @@ int main(int argc, char **argv)
 
 	//**********************************************************************
 }
+
