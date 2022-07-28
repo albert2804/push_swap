@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 15:08:24 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:14:00 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int *pivotvalues(t_status *stats)
 /*
 single pivotisation
 */
-void pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, int piv1, int piv2, t_status *stats)
+void pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
 	int count_lsta;
 	int len_lsta;
@@ -44,13 +44,13 @@ void pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, int piv1, int piv2, t_st
 	len_lsta = list_count(*lst_a);
 	while(count_lsta < len_lsta)
 	{
-		if ((*lst_a)->index >= piv1 && (*lst_a)->index <= piv2)
+		if ((*lst_a)->index >= stats->piv1 && (*lst_a)->index <= stats->piv2)
 			{
 			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
 			if ((*lst_b)->next && (*lst_b)->next->index - (*lst_b)->index == -1)
 				stats->opcount = stats->opcount + swap_b(lst_b, stats->print_flag);
 			}
-		else if ((*lst_a)->index < piv1)
+		else if ((*lst_a)->index < stats->piv1)
 			{
 			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
 			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);

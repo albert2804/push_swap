@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 15:11:50 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:48:38 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,17 +227,18 @@ void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	pivot_array = pivotvalues(stats);
 	check = 0;
 	index_lsta = list_count(*lst_a);
-	// stats->piv1 = pivot_array[i];
-	// stats->piv2 = pivot_array[i + 1];
 	// single pivot//
 	while (i < stats->pivot_count)
 	{
-		pivotisation(lst_a, lst_b, pivot_array[i], pivot_array[i + 1], stats);
+		stats->piv1 = pivot_array[i];
+		stats->piv2 = pivot_array[i + 1];
+		pivotisation(lst_a, lst_b, stats);
 		i = i + 2; // use this to pivot the stack mirrored
 		//i++; // use this to pivot the stack descending
 	}
-	pivotisation(lst_a, lst_b, pivot_array[i], index_lsta, stats);
-	//sortPivotgroup(lst_a, lst_b, 1, print_flag);
+	stats->piv1 = pivot_array[i + 1];
+	stats->piv2 = index_lsta;
+	pivotisation(lst_a, lst_b, stats);
 }
 
 int main(int argc, char **argv)
@@ -252,7 +253,7 @@ int main(int argc, char **argv)
 	
 	i_argc = argc;
 	max_pivot_count = 30;
-	i = 10;
+	i = 29;
 	// lst_a = build_stack_A1(argv[1]);
 
 
@@ -278,8 +279,8 @@ int main(int argc, char **argv)
 
 	// int *pivotelements;
 
-	while (i < max_pivot_count)
-	{
+	// while (i < max_pivot_count)
+	// {
 		lst_a = build_stack_A2(argv);
 		lst_a = index_list(lst_a);
 		list_nbr = list_count(lst_a);
@@ -290,11 +291,12 @@ int main(int argc, char **argv)
 		// stats = init_struct(lst_a);
 		stats = init_struct(lst_a);
 		stats->pivot_count = i;
+		stats->print_flag = 1;
 		print_status(stats);
 		sort(&lst_a, &lst_b, stats);
-		i ++;
 		free (stats);
-	}
+	// 	i ++;
+	// }
 	// ft_printf("\n%d, %d, %d, %d\n", pivotelements[0], pivotelements[1], pivotelements[2], pivotelements[3]);
 
 	return (0);

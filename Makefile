@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/07/28 12:51:59 by aestraic         ###   ########.fr        #
+#    Updated: 2022/07/28 15:45:48 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ obj: $(OBJ)
 
 exec: $(EXE)
 %.out : %.c 	
-	cc -Wall -Wextra -Werror -I$(HEADER_PATH) -L$(LIB_PATH) -lft $(COMPILED_SRC) $^ -o ps_test.out
+	cc -Wall -Wextra -Werror -I$(HEADER_PATH) -L$(LIB_PATH) -lft $(COMPILED_SRC) $^ -o $(EXE)
 
 library:
 #	@echo MAKE LIBFT
