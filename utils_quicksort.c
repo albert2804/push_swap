@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 18:48:17 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:10:39 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, t_status *s
 		if ((*lst_b)->index == max_val[i])
 		{
 			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
-			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
+			if (((*lst_a)->next->index - (*lst_a)->index) != 1)
+				stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
 			i++;
 		}
 		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 1)

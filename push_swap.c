@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 18:48:27 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/29 15:31:13 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,58 @@ void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	sortPivotgroup(lst_a, lst_b, stats);
 }
 
+//Finds the optimal pivotcount which has 
+//the minimum amount of operations
+int find_min_int(int *int_list, int max_c, int min_c)
+{
+	int i;
+	int pos;
+	int min_val;
+	
+	i = 0;
+	min_val = 10000000;
+	while (i < (max_c - min_c))
+	{
+		if (int_list[i] < min_val)
+		{	
+			pos = i;
+			min_val = int_list[i];	
+		}
+		i ++;
+	}
+	free(int_list);
+	return(pos + min_c);
+}
+
+//Function to save all operation_counts in a integer array
+//Afterwards function find_min_int finds the minimum value and returns the
+//corresponding pivotvalue.
+int optimal_pivot_value(char **argv, int max_c, int min_c, int i)
+{
+	int *op_counts;
+	int optimal_op_count;
+	t_list_ps *lst_a;
+	t_list_ps *lst_b;
+	t_status *stats;
+
+	optimal_op_count = 0;
+	op_counts = malloc(sizeof(int) * (max_c - min_c + 1));
+	while (i <= (max_c - min_c))
+	{
+		lst_a = build_stack_A2(argv);
+		lst_a = index_list(lst_a);
+		lst_b = NULL;
+		stats = init_struct(lst_a);
+		stats->pivot_count = min_c + i;
+		sort(&lst_a, &lst_b, stats);
+		op_counts[i] = stats->opcount;
+		free (stats);
+		i ++;
+	}
+	optimal_op_count = find_min_int(op_counts, max_c, min_c);
+	return (optimal_op_count);
+}
+
 int main(int argc, char **argv)
 {
 	t_list_ps *lst_b;
@@ -98,55 +150,27 @@ int main(int argc, char **argv)
 	int list_nbr;
 	int i;
 	t_status *stats;
+	int a;
 	
 	i_argc = argc;
 	max_pivot_count = 30;
-	i = 29;
+	i = 5;
+	a = optimal_pivot_value(argv, max_pivot_count, i, 0);
+	ft_printf("op_c:%d\n",a);
+	
 	// lst_a = build_stack_A1(argv[1]);
+	lst_a = build_stack_A2(argv);
+	lst_a = index_list(lst_a);
+	list_nbr = list_count(lst_a);
 
-
-	//**********************************************************************
-	// test mit double pointern und einfach pointern
-	// double pointer verknuepfen lst_a und tmp.
-	/*
-	t_list_ps **tmp;
-	tmp = &lst_a;
-	printList(*tmp);
-	(*tmp) = (*tmp)->next;
-
-	ft_printf("\nlst_a:");
-	printList(lst_a);
-	ft_printf("\ntmp:");
-	printList(*tmp);
-	*/
-	// sort(&lst_a, &lst_b);
-
-	// printList(lst_a);
-	// printList(lst_b);
-	//**********************************************************************
-
-	// int *pivotelements;
-
-	// while (i < max_pivot_count)
-	// {
-		lst_a = build_stack_A2(argv);
-		lst_a = index_list(lst_a);
-		list_nbr = list_count(lst_a);
-
-		// pivotelements = pivotvalues(list_nbr);
-		lst_a = index_list(lst_a);
-		lst_b = NULL;
-		// stats = init_struct(lst_a);
-		stats = init_struct(lst_a);
-		stats->pivot_count = i;
-		stats->print_flag = 1;
-		sort(&lst_a, &lst_b, stats);
-		
-		print_status(stats);
-		free (stats);
-	// 	i ++;
-	// }
-
+	lst_a = index_list(lst_a);
+	lst_b = NULL;
+	stats = init_struct(lst_a);
+	stats->pivot_count = a;
+	stats->print_flag = 1;
+	sort(&lst_a, &lst_b, stats);
+	ft_printf("%d", stats->opcount);
+	free (stats);
 	return (0);
 
 	//**********************************************************************

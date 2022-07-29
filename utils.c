@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 18:47:10 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/07/29 12:13:57 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,12 @@ t_status *init_struct(t_list_ps *lst_a)
 	
 	stats = malloc(sizeof(t_status));
 	stats->lista_count = list_count(lst_a);
-	stats->pivot_count = 15;
-	stats->opcount = 0;
+	stats->pivot_count = 0;
 	stats->print_flag = 0;
+	stats->opcount = 0;
+	stats->piv1 = 0;
+	stats->piv2 = 0;
+	stats->count_max_val = 0;
 	return (stats);
 }
 
