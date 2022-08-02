@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:16:23 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 14:06:23 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:08:53 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ int	rotate_rev_b(t_list_ps **lst, int print_flag)
 	return (1);
 }
 
-int rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag)
+int	rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	i = rotate_a(lsta, 0);

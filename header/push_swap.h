@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 14:06:54 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:22:17 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ typedef struct s_list_ps
 
 typedef struct s_status
 {
-	int	lista_count;
-	int	pivot_count;
-	int	print_flag;
-	int	opcount;
+	int	lsta_c;
+	int	piv_c;
+	int	p_f;
+	int	op_c;
 	int	piv1;
 	int	piv2;
 	int	count_max_val;
 }					t_status;
 //INPUT FUNCTIONS
-t_list_ps	*build_stack_A1(char *str);
-t_list_ps	*build_stack_A2(char **argv);
+t_list_ps	*build_stack_a1(char *str);
+t_list_ps	*build_stack_a2(char **argv);
 
 //LIBFT-FUNCTIONS
 void		ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
@@ -58,8 +58,8 @@ int			rotate_rev_b(t_list_ps **lst, int print_flag);
 
 //UTILS
 t_status	*init_struct(t_list_ps *lst_a);
-void		printList(t_list_ps *lst);
-void		printIndex(t_list_ps *lst);
+void		printlist(t_list_ps *lst);
+void		printindex(t_list_ps *lst);
 void		print_status(t_status *stats);
 int			sort_check(t_list_ps *lst_a);
 int			list_count(t_list_ps *lst);
@@ -74,10 +74,10 @@ int			rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag);
 
 //SORT
 int			count_descending_max_values(t_list_ps *lst_b);
-int			*build_max_values(int *max_values, int compare_value, t_list_ps *lst_b);
+int			*build_max_values(int *max_values, int comp_val, t_list_ps *lst_b);
 int			*descending_max_values(t_list_ps *lst_b);
-void		sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
-void		push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, t_status *stats);
+void		sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
+void		p_val(t_list_ps **l_a, t_list_ps **l_b, int *mx_val, t_status *sts);
 void		sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
 
 #endif

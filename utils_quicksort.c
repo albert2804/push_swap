@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 13:47:54 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:23:52 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	*pivotvalues(t_status *stats)
 	int	i;
 
 	i = 1;
-	pivot_values = malloc(sizeof(int) * stats->pivot_count);
-	pivot_values[0] = stats->lista_count / (stats->pivot_count + 1);
-	while (i < stats->pivot_count)
+	pivot_values = malloc(sizeof(int) * stats->piv_c);
+	pivot_values[0] = stats->lsta_c / (stats->piv_c + 1);
+	while (i < stats->piv_c)
 	{
-		pivot_values[i] = stats->lista_count / (stats->pivot_count + 1) * (i + 1);
+		pivot_values[i] = stats->lsta_c / (stats->piv_c + 1) * (i + 1);
 		i++;
 	}
 	return (pivot_values);
@@ -49,29 +49,32 @@ int	check_for_push(t_list_ps *lst_b)
 	return (0);
 }
 
-void	push_values(t_list_ps **lst_a, t_list_ps **lst_b, int *max_val, t_status *stats)
+/*
+pushes values depending on check_flag
+*/
+void	p_val(t_list_ps **l_a, t_list_ps **l_b, int *mx_val, t_status *sts)
 {
 	int	i;
 
 	i = 0;
-	while (i <= stats->count_max_val)
+	while (i <= sts->count_max_val)
 	{
-		if ((*lst_b)->index == max_val[i] && i != stats->count_max_val)
+		if ((*l_b)->index == mx_val[i] && i != sts->count_max_val)
 		{
-			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
-			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
+			sts->op_c = sts->op_c + push_a(l_a, l_b, sts->p_f);
+			sts->op_c = sts->op_c + rotate_a(l_a, sts->p_f);
 			i++;
 		}
-		else if ((*lst_b)->index == max_val[i] && i == stats->count_max_val)
+		else if ((*l_b)->index == mx_val[i] && i == sts->count_max_val)
 		{
-			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
+			sts->op_c = sts->op_c + push_a(l_a, l_b, sts->p_f);
 			i++;
 		}
-		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 1)
-			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
-		else if (rotate_or_rrotate(*lst_b, max_val[i]) == 0)
-			stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
+		else if (rotate_or_rrotate(*l_b, mx_val[i]) == 1)
+			sts->op_c = sts->op_c + rotate_b(l_b, sts->p_f);
+		else if (rotate_or_rrotate(*l_b, mx_val[i]) == 0)
+			sts->op_c = sts->op_c + rotate_rev_b(l_b, sts->p_f);
 	}
 	while (--i > 0)
-		stats->opcount = stats->opcount + rotate_rev_a(lst_a, stats->print_flag);
+		sts->op_c = sts->op_c + rotate_rev_a(l_a, sts->p_f);
 }

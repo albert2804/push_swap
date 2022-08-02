@@ -6,13 +6,13 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 13:45:37 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:23:23 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	printList(t_list_ps *lst)
+void	printlist(t_list_ps *lst)
 {
 	t_list_ps	*tmp;
 
@@ -25,7 +25,7 @@ void	printList(t_list_ps *lst)
 	ft_printf("NULL\n");
 }
 
-void	printIndex(t_list_ps *lst)
+void	printindex(t_list_ps *lst)
 {
 	t_list_ps	*tmp;
 
@@ -72,10 +72,10 @@ int	sort_check(t_list_ps *lst_a)
 
 void	print_status(t_status *stats)
 {
-	ft_printf("List A Count: %d\n", stats->lista_count);
-	ft_printf("Pivot Count: %d\n", stats->pivot_count);
-	ft_printf("Operations Count: %d\n", stats->opcount);
-	ft_printf("PrintFlag: %d\n", stats->print_flag);
+	ft_printf("List A Count: %d\n", stats->lsta_c);
+	ft_printf("Pivot Count: %d\n", stats->piv_c);
+	ft_printf("Operations Count: %d\n", stats->op_c);
+	ft_printf("PrintFlag: %d\n", stats->p_f);
 }
 
 t_status	*init_struct(t_list_ps *lst_a)
@@ -83,10 +83,10 @@ t_status	*init_struct(t_list_ps *lst_a)
 	t_status	*stats;
 
 	stats = malloc(sizeof(t_status));
-	stats->lista_count = list_count(lst_a);
-	stats->pivot_count = 0;
-	stats->print_flag = 0;
-	stats->opcount = 0;
+	stats->lsta_c = list_count(lst_a);
+	stats->piv_c = 0;
+	stats->p_f = 0;
+	stats->op_c = 0;
 	stats->piv1 = 0;
 	stats->piv2 = 0;
 	stats->count_max_val = 0;
@@ -154,22 +154,22 @@ int	count_descending_max_values(t_list_ps *lst_b)
 this function is used for building the max_values array.
 Kind of sourcing out bc of norminette
 */
-int	*build_max_values(int *max_values, int compare_value, t_list_ps *lst_b)
+int	*build_max_values(int *max_values, int comp_val, t_list_ps *lst_b)
 {
 	int	i;
 
 	i = 0;
 	while (1)
 	{
-		if (lst_b->index - compare_value == 1)
+		if (lst_b->index - comp_val == 1)
 		{
-			max_values[i] = compare_value;
-			compare_value = lst_b->index;
+			max_values[i] = comp_val;
+			comp_val = lst_b->index;
 			i++;
 		}
-		else if (lst_b->index - compare_value > 1)
+		else if (lst_b->index - comp_val > 1)
 		{
-			compare_value = lst_b->index;
+			comp_val = lst_b->index;
 			i = 0;
 		}
 		if (lst_b->index == find_max_index(lst_b))

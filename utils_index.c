@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:54:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 14:34:20 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:10:28 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 /*
 threshold is value to cut out every number which was already indexed
 the threshold is the biggest number in the stack
+
+init threshold variable woth INT_MAX it is the biggest number + 1.
+do an Error Message if nbr is bigger than SIZE_MAX.
 */
 int	threshold_for_index_func(t_list_ps *lst)
 {
@@ -23,8 +26,8 @@ int	threshold_for_index_func(t_list_ps *lst)
 	t_list_ps	*tmp;
 
 	tmp = lst;
-	threshold = INT_MAX;	//do threshold variable. it is the biggest number + 1.
-	threshold ++;			//do an Error Message if nbr is bigger than SIZE_MAX.	
+	threshold = INT_MAX;
+	threshold ++;
 	while ((tmp) != NULL)
 	{
 		if ((tmp)->content <= threshold && (tmp->index) == 0)
@@ -77,31 +80,6 @@ t_list_ps	*index_list(t_list_ps *lst)
 	}
 	return (lst);
 }
-
-// /*
-// this function shall find the 2 elemets in which the "inserted element" index fits
-// */
-// int *find_edge_elements(t_list_ps *lst_a, int inserted_elem)
-// {
-// 	t_list_ps *temp;
-// 	int *pos;
-
-// 	pos = malloc(sizeof(int) * 2);
-// 	pos[0] = 0;
-// 	pos[1] = 0;
-// 	temp = lst_a;
-// 	while (temp->next != NULL)
-// 	{
-// 		if (inserted_elem > temp->index && inserted_elem < temp->next->index)
-// 		{
-// 			pos[0] = temp->index;
-// 			pos[1] = temp->next->index;
-// 			return(pos);
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	return (pos);
-// }
 
 int	find_max_index(t_list_ps *lst_b)
 {

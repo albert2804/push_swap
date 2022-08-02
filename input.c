@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 13:03:22 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:03:17 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	**read_input(char *str)
 build Stack A1 from the input argv[1], from e.g. $arg = "1 2 3 4"
 the index will be initalized 0 for all the elements
 */
-t_list_ps	*build_stack_A1(char *str)
+t_list_ps	*build_stack_a1(char *str)
 {
 	t_list_ps	*lst_a;
 	char		**split_str;
@@ -53,7 +53,7 @@ t_list_ps	*build_stack_A1(char *str)
 build Stack A2 from the input argv[1], from e.g. ./test.out 1 2 3 4
 the index will be initalized 0 for all the elements
 */
-t_list_ps	*build_stack_A2(char **argv)
+t_list_ps	*build_stack_a2(char **argv)
 {
 	t_list_ps	*lst_a;
 	int			elem;

@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 15:45:10 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:22:49 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,21 @@ void	pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	while (count_lsta < len_lsta)
 	{
 		if ((*lst_a)->index >= stats->piv1 && (*lst_a)->index <= stats->piv2)
-		{	
-			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
-		}
+			stats->op_c = stats->op_c + push_b(lst_a, lst_b, stats->p_f);
 		else if ((*lst_a)->index < stats->piv1)
 		{
-			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
-			//stats->opcount = stats->opcount + rrab(lst_a, lst_b, stats->print_flag);
-			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
-			// stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
+			stats->op_c = stats->op_c + push_b(lst_a, lst_b, stats->p_f);
+			stats->op_c = stats->op_c + rotate_b(lst_b, stats->p_f);
 		}
+		else if ((*lst_a)->index > len_lsta - 3)
+			stats->op_c = stats->op_c + rotate_a(lst_a, stats->p_f);
 		else
-			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
+			stats->op_c = stats->op_c + rotate_a(lst_a, stats->p_f);
 		count_lsta ++;
 	}
 }
 
-void	sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
+void	sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
 	int	*max_values;
 
@@ -53,14 +51,14 @@ void	sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 		if (check_for_push(*lst_b) == 0)
 		{
 			if (rotate_or_rrotate(*lst_b, max_values[0]) == 1)
-				stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
+				stats->op_c = stats->op_c + rotate_b(lst_b, stats->p_f);
 			else if (rotate_or_rrotate(*lst_b, max_values[0]) == 0)
-				stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
+				stats->op_c = stats->op_c + rotate_rev_b(lst_b, stats->p_f);
 		}
 		else if (check_for_push(*lst_b) == 1 && stats->count_max_val == 0)
-			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
+			stats->op_c = stats->op_c + push_a(lst_a, lst_b, stats->p_f);
 		else if (check_for_push(*lst_b) == 1 && stats->count_max_val > 0)
-			push_values(lst_a, lst_b, max_values, stats);
+			p_val(lst_a, lst_b, max_values, stats);
 		free(max_values);
 	}
 }
@@ -76,7 +74,7 @@ void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	pivot_array = pivotvalues(stats);
 	check = 0;
 	index_lsta = list_count(*lst_a);
-	while (i < stats->pivot_count)
+	while (i < stats->piv_c)
 	{
 		stats->piv1 = pivot_array[i];
 		stats->piv2 = pivot_array[i + 1];
@@ -87,7 +85,7 @@ void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	stats->piv1 = pivot_array[i + 1];
 	stats->piv2 = index_lsta;
 	pivotisation(lst_a, lst_b, stats);
-	sortPivotgroup(lst_a, lst_b, stats);
+	sortpivgroup(lst_a, lst_b, stats);
 }
 
 //Finds the optimal pivotcount which has 
@@ -128,13 +126,13 @@ int	optimal_pivot_value(char **argv, int max_c, int min_c, int i)
 	op_counts = malloc(sizeof(int) * (max_c - min_c + 1));
 	while (i <= (max_c - min_c))
 	{
-		lst_a = build_stack_A2(argv);
+		lst_a = build_stack_a2(argv);
 		lst_a = index_list(lst_a);
 		lst_b = NULL;
 		stats = init_struct(lst_a);
-		stats->pivot_count = min_c + i;
+		stats->piv_c = min_c + i;
 		sort(&lst_a, &lst_b, stats);
-		op_counts[i] = stats->opcount;
+		op_counts[i] = stats->op_c;
 		free (stats);
 		i ++;
 	}
@@ -159,18 +157,18 @@ int	main(int argc, char **argv)
 	a = optimal_pivot_value(argv, max_pivot_count, i, 0);
 	ft_printf("op_c:%d\n",a);
 	
-	// lst_a = build_stack_A1(argv[1]);
-	lst_a = build_stack_A2(argv);
+	// lst_a = build_stack_a1(argv[1]);
+	lst_a = build_stack_a2(argv);
 	lst_a = index_list(lst_a);
 	list_nbr = list_count(lst_a);
 
 	lst_a = index_list(lst_a);
 	lst_b = NULL;
 	stats = init_struct(lst_a);
-	stats->pivot_count = a;
-	stats->print_flag = 1;
+	stats->piv_c = a;
+	stats->p_f = 1;
 	sort(&lst_a, &lst_b, stats);
-	ft_printf("%d", stats->opcount);
+	ft_printf("%d", stats->op_c);
 	free (stats);
 	return (0);
 
