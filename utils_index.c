@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:54:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/28 18:52:01 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:34:20 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,41 @@
 threshold is value to cut out every number which was already indexed
 the threshold is the biggest number in the stack
 */
-int threshold_for_index_func(t_list_ps *lst)
+int	threshold_for_index_func(t_list_ps *lst)
 {
-	long threshold;
-	t_list_ps *tmp;
+	long		threshold;
+	t_list_ps	*tmp;
 
 	tmp = lst;
 	threshold = INT_MAX;	//do threshold variable. it is the biggest number + 1.
-	threshold++; 			//do an Error Message if nbr is bigger than SIZE_MAX.	
-								
-	while((tmp) != NULL)
+	threshold ++;			//do an Error Message if nbr is bigger than SIZE_MAX.	
+	while ((tmp) != NULL)
 	{
-		if((tmp)->content <= threshold && (tmp->index) == 0)
+		if ((tmp)->content <= threshold && (tmp->index) == 0)
 			threshold = (tmp)->content;
 		(tmp) = (tmp)->next;
 	}
-	return(threshold);
+	return (threshold);
 }
 
 /*
 index every element one at a time in the list, depending on the threshold
 */
-t_list_ps *index_elem(t_list_ps *lst, int threshold, int indx)
+t_list_ps	*index_elem(t_list_ps *lst, int threshold, int indx)
 {
-	t_list_ps *tmp;
-	
+	t_list_ps	*tmp;
+
 	tmp = lst;
-	while((tmp) != NULL)
+	while ((tmp) != NULL)
 	{
 		if (tmp->content == threshold)
-			{
-				tmp->index = indx;
-				return(lst);
-			}
+		{
+			tmp->index = indx;
+			return (lst);
+		}
 		tmp = tmp->next;
 	}
-	return(lst);
+	return (lst);
 }
 
 /*
@@ -60,21 +59,21 @@ build an indexed list, first the smallest number will be indexed,
 afterwards the index get bigger (indx++). Because of the threshold,
 already indexed numers are not considered.
 */
-t_list_ps *index_list(t_list_ps *lst)
+t_list_ps	*index_list(t_list_ps *lst)
 {
-	int threshold;
-	int indx;
-	t_list_ps *tmp;
-	int count;
-	
+	int			threshold;
+	int			indx;
+	t_list_ps	*tmp;
+	int			count;
+
 	indx = 1;
 	count = list_count(lst);
 	tmp = lst;
-	while(indx <= count + 1)
+	while (indx <= count + 1)
 	{
 		threshold = threshold_for_index_func(lst);
 		tmp = index_elem(lst, threshold, indx);
-		indx++;		
+		indx++;
 	}
 	return (lst);
 }
@@ -104,9 +103,9 @@ t_list_ps *index_list(t_list_ps *lst)
 // 	return (pos);
 // }
 
-int find_max_index(t_list_ps *lst_b)
+int	find_max_index(t_list_ps *lst_b)
 {
-	int value;
+	int	value;
 
 	value = 0;
 	while (lst_b)

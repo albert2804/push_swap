@@ -6,44 +6,43 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/29 12:13:57 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 13:45:37 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <push_swap.h>
+#include <push_swap.h>
 
-void printList(t_list_ps *lst)
+void	printList(t_list_ps *lst)
 {
-    t_list_ps *tmp;
-	
+	t_list_ps	*tmp;
+
 	tmp = lst;
-    while(tmp != NULL)
-    {
-        ft_printf("%d->", tmp->content);
-        tmp = tmp->next;
-    }
-    ft_printf("NULL\n");
+	while (tmp != NULL)
+	{
+		ft_printf("%d->", tmp->content);
+		tmp = tmp->next;
+	}
+	ft_printf("NULL\n");
 }
 
-void printIndex(t_list_ps *lst)
+void	printIndex(t_list_ps *lst)
 {
-    t_list_ps *tmp;
-	
+	t_list_ps	*tmp;
+
 	tmp = lst;
-    while(tmp != NULL)
-    {
-        ft_printf("%d->", tmp->index);
-        tmp = tmp->next;
-    }
-    ft_printf("NULL\n");
+	while (tmp != NULL)
+	{
+		ft_printf("%d->", tmp->index);
+		tmp = tmp->next;
+	}
+	ft_printf("NULL\n");
 }
 
-int list_count(t_list_ps *lst)
+int	list_count(t_list_ps *lst)
 {
-	
-	t_list_ps *temp;
-	int i;
-	
+	t_list_ps	*temp;
+	int			i;
+
 	i = 1;
 	temp = lst;
 	while (temp->next != NULL)
@@ -57,12 +56,12 @@ int list_count(t_list_ps *lst)
 /*
 checks if lst_a is sorted
 */
-int sort_check(t_list_ps *lst_a)
+int	sort_check(t_list_ps *lst_a)
 {
-	t_list_ps *temp;
-	
+	t_list_ps	*temp;
+
 	temp = lst_a;
-	while(temp->next != NULL)
+	while (temp->next != NULL)
 	{
 		if (temp->content > temp->next->content)
 			return (0);
@@ -71,7 +70,7 @@ int sort_check(t_list_ps *lst_a)
 	return (1);
 }
 
-void print_status(t_status *stats)
+void	print_status(t_status *stats)
 {
 	ft_printf("List A Count: %d\n", stats->lista_count);
 	ft_printf("Pivot Count: %d\n", stats->pivot_count);
@@ -79,10 +78,10 @@ void print_status(t_status *stats)
 	ft_printf("PrintFlag: %d\n", stats->print_flag);
 }
 
-t_status *init_struct(t_list_ps *lst_a)
+t_status	*init_struct(t_list_ps *lst_a)
 {
-	t_status *stats;
-	
+	t_status	*stats;
+
 	stats = malloc(sizeof(t_status));
 	stats->lista_count = list_count(lst_a);
 	stats->pivot_count = 0;
@@ -99,20 +98,20 @@ checks if lst should be rotated or reverse_rotated.
 if 1 that means reverse_rotating
 0 means rotating list is better.
 */
-int rotate_or_rrotate(t_list_ps *lst_b, int index)
+int	rotate_or_rrotate(t_list_ps *lst_b, int index)
 {
-	int count;
-	int lcount;
+	int	count;
+	int	lcount;
 
 	count = 0;
 	lcount = list_count(lst_b);
-	while(lst_b->index != index)
+	while (lst_b->index != index)
 	{
 		lst_b = lst_b->next;
 		count ++;
 	}
-	if (count > lcount/2)
-		return (0); 
+	if (count > lcount / 2)
+		return (0);
 	else
 		return (1);
 }
@@ -125,10 +124,10 @@ Needed to get the proper malloc size of the array max_values in
 function descending_max_values
 */
 
-int count_descending_max_values(t_list_ps *lst_b)
+int	count_descending_max_values(t_list_ps *lst_b)
 {
-	int count;
-	int compare_value;
+	int	count;
+	int	compare_value;
 
 	compare_value = lst_b->index;
 	count = 0;
@@ -155,9 +154,9 @@ int count_descending_max_values(t_list_ps *lst_b)
 this function is used for building the max_values array.
 Kind of sourcing out bc of norminette
 */
-int *build_max_values(int *max_values, int compare_value, t_list_ps *lst_b)
+int	*build_max_values(int *max_values, int compare_value, t_list_ps *lst_b)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (1)
@@ -187,11 +186,11 @@ i.e. index_max -> index_max - 1 -> index_max - 2, ...
 Returns the index values of the found elements.
 Goal is to push the values into stack A, so Stack B has to be rotated less.
 */
-int *descending_max_values(t_list_ps *lst_b)
+int	*descending_max_values(t_list_ps *lst_b)
 {
-	int count_max_values;
-	int compare_value;
-	int *max_values;
+	int	count_max_values;
+	int	compare_value;
+	int	*max_values;
 
 	count_max_values = count_descending_max_values(lst_b);
 	max_values = ft_calloc(count_max_values + 1, sizeof(int));

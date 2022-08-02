@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/29 15:31:13 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:34:52 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,36 @@
 /*
 single pivotisation
 */
-void pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
+void	pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
-	int count_lsta;
-	int len_lsta;
+	int	count_lsta;
+	int	len_lsta;
 
 	count_lsta = 0;
 	len_lsta = list_count(*lst_a);
-	while(count_lsta < len_lsta)
+	while (count_lsta < len_lsta)
 	{
 		if ((*lst_a)->index >= stats->piv1 && (*lst_a)->index <= stats->piv2)
-			{
+		{	
 			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
-			if ((*lst_b)->next && (*lst_b)->next->index - (*lst_b)->index == -1)
-				stats->opcount = stats->opcount + swap_b(lst_b, stats->print_flag);
-			}
+		}
 		else if ((*lst_a)->index < stats->piv1)
-			{
+		{
 			stats->opcount = stats->opcount + push_b(lst_a, lst_b, stats->print_flag);
+			//stats->opcount = stats->opcount + rrab(lst_a, lst_b, stats->print_flag);
 			stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
-			}
+			// stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
+		}
 		else
 			stats->opcount = stats->opcount + rotate_a(lst_a, stats->print_flag);
 		count_lsta ++;
 	}
 }
 
-void sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
+void	sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
-	int *max_values;
+	int	*max_values;
+
 	while (find_max_index(*lst_b) > 1)
 	{
 		stats->count_max_val = count_descending_max_values(*lst_b);
@@ -52,9 +53,9 @@ void sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 		if (check_for_push(*lst_b) == 0)
 		{
 			if (rotate_or_rrotate(*lst_b, max_values[0]) == 1)
-					stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
+				stats->opcount = stats->opcount + rotate_b(lst_b, stats->print_flag);
 			else if (rotate_or_rrotate(*lst_b, max_values[0]) == 0)
-					stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
+				stats->opcount = stats->opcount + rotate_rev_b(lst_b, stats->print_flag);
 		}
 		else if (check_for_push(*lst_b) == 1 && stats->count_max_val == 0)
 			stats->opcount = stats->opcount + push_a(lst_a, lst_b, stats->print_flag);
@@ -64,12 +65,12 @@ void sortPivotgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	}
 }
 
-void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
+void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
-	int check;
-	int index_lsta;
-	int *pivot_array;
-	int i;
+	int	check;
+	int	index_lsta;
+	int	*pivot_array;
+	int	i;
 
 	i = 0;
 	pivot_array = pivotvalues(stats);
@@ -86,17 +87,17 @@ void sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 	stats->piv1 = pivot_array[i + 1];
 	stats->piv2 = index_lsta;
 	pivotisation(lst_a, lst_b, stats);
-	sortPivotgroup(lst_a, lst_b, stats);
+	//sortPivotgroup(lst_a, lst_b, stats);
 }
 
 //Finds the optimal pivotcount which has 
 //the minimum amount of operations
-int find_min_int(int *int_list, int max_c, int min_c)
+int	find_min_int(int *int_list, int max_c, int min_c)
 {
-	int i;
-	int pos;
-	int min_val;
-	
+	int	i;
+	int	pos;
+	int	min_val;
+
 	i = 0;
 	min_val = 10000000;
 	while (i < (max_c - min_c))
@@ -104,24 +105,24 @@ int find_min_int(int *int_list, int max_c, int min_c)
 		if (int_list[i] < min_val)
 		{	
 			pos = i;
-			min_val = int_list[i];	
+			min_val = int_list[i];
 		}
 		i ++;
 	}
 	free(int_list);
-	return(pos + min_c);
+	return (pos + min_c);
 }
 
 //Function to save all operation_counts in a integer array
 //Afterwards function find_min_int finds the minimum value and returns the
 //corresponding pivotvalue.
-int optimal_pivot_value(char **argv, int max_c, int min_c, int i)
+int	optimal_pivot_value(char **argv, int max_c, int min_c, int i)
 {
-	int *op_counts;
-	int optimal_op_count;
-	t_list_ps *lst_a;
-	t_list_ps *lst_b;
-	t_status *stats;
+	int			*op_counts;
+	int			optimal_op_count;
+	t_list_ps	*lst_a;
+	t_list_ps	*lst_b;
+	t_status	*stats;
 
 	optimal_op_count = 0;
 	op_counts = malloc(sizeof(int) * (max_c - min_c + 1));
@@ -141,7 +142,7 @@ int optimal_pivot_value(char **argv, int max_c, int min_c, int i)
 	return (optimal_op_count);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_list_ps *lst_b;
 	t_list_ps *lst_a;

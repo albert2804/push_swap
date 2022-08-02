@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:07:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/08 12:20:24 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:31:14 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	ft_conv_pointer(va_list arg_list)
 {
 	unsigned long	ptr;
 	char			*s;
-	unsigned int	i;
 	size_t			count;
 
 	ptr = (unsigned long) va_arg(arg_list, void *);
@@ -102,7 +101,6 @@ int	ft_conv_pointer(va_list arg_list)
 	s = malloc(count * sizeof(char) + 1);
 	if (!s)
 		return (0);
-	i = 0;
 	s = build_string(ptr, s);
 	s[count] = '\0';
 	s = ft_reverse_string_ptr(s);

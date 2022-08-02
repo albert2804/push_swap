@@ -6,11 +6,11 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/06/17 16:16:46 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 13:40:53 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <push_swap.h>
+#include <push_swap.h>
 
 t_list_ps	*ft_lstnew_ps(int content, int indx)
 {
@@ -22,7 +22,6 @@ t_list_ps	*ft_lstnew_ps(int content, int indx)
 	list->content = content;
 	list->index = indx;
 	list->next = NULL;
-	
 	return (list);
 }
 
@@ -64,12 +63,7 @@ void	ft_lstadd_back_ps(t_list_ps **lst, t_list_ps *new)
 		lst_tmp = ft_lstlast_ps(*lst);
 		if (lst_tmp)
 		{
-			lst_tmp-> next = new;
+			lst_tmp->next = new;
 		}
 	}
 }
-
-
-
-
-
