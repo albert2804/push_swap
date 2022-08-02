@@ -6,13 +6,14 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/02 14:26:39 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/02 16:11:48 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAIN = push_swap.c
+NAME = push_swap
 
 SRC = 	utils_libft.c\
+		push_swap.c\
 		utils_index.c\
 		utils_quicksort.c\
 		utils.c\
@@ -21,27 +22,22 @@ SRC = 	utils_libft.c\
 		push.c\
 		input.c
 
-
-COMPILED_MAIN = $(MAIN:.c=.out)
-COMPILED_SRC = $(SRC:.c=.o)
-
-EXE = $(COMPILED_MAIN)
-OBJ  = $(COMPILED_SRC)
+OBJ  = $(SRC:.c=.o)
 
 HEADER_PATH = header
 LIB_PATH = lib
 SRC_PATH = src
 OBJ_PATH = obj
 
-all:  library obj exec
+all:  library obj $(NAME)
 
 obj: $(OBJ)
-%.o : %.c 
-	cc -Wall -Wextra -Werror -I$(HEADER_PATH) -c $^ 
 
-exec: $(EXE)
-%.out : %.c 	
-	cc -Wall -Wextra -Werror -I$(HEADER_PATH) $(COMPILED_SRC) $^ -L$(LIB_PATH) -lft -o $(EXE)
+%.o : %.c
+	cc -Wall -Wextra -Werror -I$(HEADER_PATH) -c $^ 
+	
+$(NAME): $(OBJ)
+	cc -Wall -Wextra -Werror -I$(HEADER_PATH) $(COMPILED_SRC) $^ -L$(LIB_PATH) -lft -o $(NAME)
 
 library:
 #	@echo MAKE LIBFT
@@ -65,7 +61,7 @@ clean:
 fclean: clean
 	@make fclean -C $(SRC_PATH)/libft
 	@make fclean -C $(SRC_PATH)/ft_printf
-	@rm -f $(EXE)
+	@rm -f $(NAME)
 	@echo Libraries and exeutables removed
 	
 re: fclean all

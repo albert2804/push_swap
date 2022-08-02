@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 14:34:52 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:45:10 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 		stats->piv2 = pivot_array[i + 1];
 		pivotisation(lst_a, lst_b, stats);
 		i = i + 2; // use this to pivot the stack mirrored
-		//i++; // use this to pivot the stack descending
+		// i++; // use this to pivot the stack descending
 	}
 	stats->piv1 = pivot_array[i + 1];
 	stats->piv2 = index_lsta;
 	pivotisation(lst_a, lst_b, stats);
-	//sortPivotgroup(lst_a, lst_b, stats);
+	sortPivotgroup(lst_a, lst_b, stats);
 }
 
 //Finds the optimal pivotcount which has 
