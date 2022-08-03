@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 17:22:49 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:04:27 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,27 +142,25 @@ int	optimal_pivot_value(char **argv, int max_c, int min_c, int i)
 
 int	main(int argc, char **argv)
 {
-	t_list_ps *lst_b;
-	t_list_ps *lst_a;
-	int i_argc;
-	int max_pivot_count;
-	int list_nbr;
-	int i;
-	t_status *stats;
-	int a;
-	
-	i_argc = argc;
-	max_pivot_count = 30;
-	i = 5;
-	a = optimal_pivot_value(argv, max_pivot_count, i, 0);
+	t_list_ps	*lst_b;
+	t_list_ps	*lst_a;
+	t_status	*stats;
+	int			a;
+
+	if (argc > 3)
+		lst_a = build_stack_a2(argv);
+	ft_printf("argc: %d\n", argc);
+
+	a = optimal_pivot_value(argv, 30, 1, 0);
 	ft_printf("op_c:%d\n",a);
-	
-	// lst_a = build_stack_a1(argv[1]);
+	// char **readin;
+	// readin = read_input(*(argv + 1));
+	// ft_printf("STRING:%s\n", readin[0]);
+	// lst_a = read_in(argc, argv);
+	// lst_a = build_stack_a1(*argv);
 	lst_a = build_stack_a2(argv);
 	lst_a = index_list(lst_a);
-	list_nbr = list_count(lst_a);
 
-	lst_a = index_list(lst_a);
 	lst_b = NULL;
 	stats = init_struct(lst_a);
 	stats->piv_c = a;
@@ -174,4 +172,3 @@ int	main(int argc, char **argv)
 
 	//**********************************************************************
 }
-

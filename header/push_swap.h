@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 17:22:17 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:36:08 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_status
 //INPUT FUNCTIONS
 t_list_ps	*build_stack_a1(char *str);
 t_list_ps	*build_stack_a2(char **argv);
+t_list_ps	*read_in(int nbr_arg, char **str);
+char		**read_input(char *str);
 
 //LIBFT-FUNCTIONS
 void		ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
@@ -71,6 +73,8 @@ int			check_for_push(t_list_ps *lst_b);
 int			*pivotvalues(t_status *stats);
 void		pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
 int			rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag);
+int			find_min_int(int *int_list, int max_c, int min_c);
+int			optimal_pivot_value(char **argv, int max_c, int min_c, int i);
 
 //SORT
 int			count_descending_max_values(t_list_ps *lst_b);

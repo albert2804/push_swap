@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 17:03:17 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:03:58 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 -reads the input $ARG and use the split function on $ARG, returns a **char.
 */
-static char	**read_input(char *str)
+char	**read_input(char *str)
 {
 	char	**split_string;
 
@@ -79,3 +79,25 @@ input:
 1) ./test.out 1 2 3 4
 2) ./test.out $arg
 */
+// t_list_ps *read_in(int nbr_arg, char **str)
+// {
+// 	t_list_ps *lst_a;
+// 	int i;
+
+// 	i = 0;
+// 	lst_a = NULL;
+// 	if (nbr_arg == 1)
+// 	{
+// 		ft_printf("Error");
+// 		exit(0);
+// 		return (NULL);
+// 	}
+// 	else (nbr_arg > 1)
+// 	{
+// 		while (i < nbr_arg)
+// 		{
+			
+// 		}
+// 	}
+// 	return (lst_a);
+// }
