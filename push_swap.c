@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/03 11:04:27 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:59:21 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,54 +114,46 @@ int	find_min_int(int *int_list, int max_c, int min_c)
 //Function to save all operation_counts in a integer array
 //Afterwards function find_min_int finds the minimum value and returns the
 //corresponding pivotvalue.
-int	optimal_pivot_value(char **argv, int max_c, int min_c, int i)
+int	optimal_pivot_value(char **argv, int argc, int i)
 {
 	int			*op_counts;
-	int			optimal_op_count;
+	int			opt_op_count;
 	t_list_ps	*lst_a;
 	t_list_ps	*lst_b;
 	t_status	*stats;
 
-	optimal_op_count = 0;
-	op_counts = malloc(sizeof(int) * (max_c - min_c + 1));
-	while (i <= (max_c - min_c))
+	opt_op_count = 0;
+	op_counts = malloc(sizeof(int) * (30 - 3 + 1));
+	while (i <= (30 - 3))
 	{
-		lst_a = build_stack_a2(argv);
-		lst_a = index_list(lst_a);
+		lst_a = NULL;
 		lst_b = NULL;
+		lst_a = read_in(lst_a, argc, argv);
+		lst_a = index_list(lst_a);
 		stats = init_struct(lst_a);
-		stats->piv_c = min_c + i;
+		stats->piv_c = 3 + i;
 		sort(&lst_a, &lst_b, stats);
-		op_counts[i] = stats->op_c;
+		op_counts[i++] = stats->op_c;
 		free (stats);
-		i ++;
+		free(lst_a);
+		free(lst_b);
 	}
-	optimal_op_count = find_min_int(op_counts, max_c, min_c);
-	return (optimal_op_count);
+	opt_op_count = find_min_int(op_counts, 30, 3);
+	return (opt_op_count);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list_ps	*lst_b;
 	t_list_ps	*lst_a;
+	t_list_ps	*lst_b;
 	t_status	*stats;
 	int			a;
 
-	if (argc > 3)
-		lst_a = build_stack_a2(argv);
-	ft_printf("argc: %d\n", argc);
-
-	a = optimal_pivot_value(argv, 30, 1, 0);
-	ft_printf("op_c:%d\n",a);
-	// char **readin;
-	// readin = read_input(*(argv + 1));
-	// ft_printf("STRING:%s\n", readin[0]);
-	// lst_a = read_in(argc, argv);
-	// lst_a = build_stack_a1(*argv);
-	lst_a = build_stack_a2(argv);
-	lst_a = index_list(lst_a);
-
+	a = optimal_pivot_value(argv, argc, 0);
+	lst_a = NULL;
 	lst_b = NULL;
+	lst_a = read_in(lst_a, argc, argv);
+	lst_a = index_list(lst_a);
 	stats = init_struct(lst_a);
 	stats->piv_c = a;
 	stats->p_f = 1;

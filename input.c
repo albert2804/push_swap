@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/03 11:03:58 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/03 18:29:46 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,17 @@ char	**read_input(char *str)
 /*
 build Stack A1 from the input argv[1], from e.g. $arg = "1 2 3 4"
 the index will be initalized 0 for all the elements
+Either work with double pointer or return value
 */
-t_list_ps	*build_stack_a1(char *str)
+t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str)
 {
-	t_list_ps	*lst_a;
+	t_list_ps	*new_node;
 	char		**split_str;
 	int			elem;
-	t_list_ps	*new_node;
 	int			i;
 
-	i = 1;
+	i = 0;
 	split_str = read_input(str);
-	elem = ft_atoi((split_str[0]));
-	lst_a = ft_lstnew_ps(elem, 0);
 	while (split_str[i] != NULL)
 	{
 		elem = ft_atoi(split_str[i]);
@@ -46,58 +44,61 @@ t_list_ps	*build_stack_a1(char *str)
 		ft_lstadd_back_ps(&lst_a, new_node);
 		i ++;
 	}
-	return (lst_a);
+	free(split_str);
+	return(lst_a);
 }
 
-/*
-build Stack A2 from the input argv[1], from e.g. ./test.out 1 2 3 4
-the index will be initalized 0 for all the elements
-*/
-t_list_ps	*build_stack_a2(char **argv)
-{
-	t_list_ps	*lst_a;
-	int			elem;
-	t_list_ps	*new_node;
-	int			i;
+// void	build_stack_from_argv(t_list_ps **lst_a, char *str)
+// {
+// 	t_list_ps	*new_node;
+// 	char		**split_str;
+// 	int			elem;
+// 	int			i;
 
-	i = 2;
-	elem = ft_atoi((argv[1]));
-	lst_a = ft_lstnew_ps(elem, 0);
-	while (argv[i] != NULL)
-	{
-		elem = ft_atoi(argv[i]);
-		new_node = ft_lstnew_ps(elem, 0);
-		ft_lstadd_back_ps(&lst_a, new_node);
-		i ++;
-	}
-	return (lst_a);
-}
+// 	i = 0;
+// 	split_str = read_input(str);
+// 	while (split_str[i] != NULL)
+// 	{
+// 		elem = ft_atoi(split_str[i]);
+// 		new_node = ft_lstnew_ps(elem, 0);
+// 		ft_lstadd_back_ps(lst_a, new_node);
+// 		i ++;
+// 	}
+// 	free(split_str);
+// }
 
 /*
 build Stack A depending on the input data, if it is one of the following
 input:
 1) ./test.out 1 2 3 4
 2) ./test.out $arg
+Either work with double pointer or return value
 */
-// t_list_ps *read_in(int nbr_arg, char **str)
+t_list_ps *read_in(t_list_ps *lst_a, int nbr_arg, char **argv)
+{
+	int			i;
+
+	i = 0;
+	if (nbr_arg == 1)
+	{
+		ft_printf("Error");
+		exit(0);
+	}
+	while (++i < nbr_arg)
+		lst_a = build_stack_from_argv(lst_a, argv[i]);
+	return (lst_a);
+}
+
+// void	read_in(t_list_ps **lst_a, int nbr_arg, char **argv)
 // {
-// 	t_list_ps *lst_a;
-// 	int i;
+// 	int			i;
 
 // 	i = 0;
-// 	lst_a = NULL;
 // 	if (nbr_arg == 1)
 // 	{
 // 		ft_printf("Error");
 // 		exit(0);
-// 		return (NULL);
 // 	}
-// 	else (nbr_arg > 1)
-// 	{
-// 		while (i < nbr_arg)
-// 		{
-			
-// 		}
-// 	}
-// 	return (lst_a);
+// 	while (++i < nbr_arg)
+// 		build_stack_from_argv(lst_a, argv[i]);
 // }

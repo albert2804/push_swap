@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 17:23:23 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:39:19 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	printlist(t_list_ps *lst)
 		ft_printf("%d->", tmp->content);
 		tmp = tmp->next;
 	}
-	ft_printf("NULL\n");
+	//free (tmp);
+	ft_printf("NULLL\n");
 }
 
 void	printindex(t_list_ps *lst)
@@ -35,6 +36,7 @@ void	printindex(t_list_ps *lst)
 		ft_printf("%d->", tmp->index);
 		tmp = tmp->next;
 	}
+	//free (tmp);
 	ft_printf("NULL\n");
 }
 
@@ -90,6 +92,8 @@ t_status	*init_struct(t_list_ps *lst_a)
 	stats->piv1 = 0;
 	stats->piv2 = 0;
 	stats->count_max_val = 0;
+	stats->max_piv_c = 30;
+	stats->min_piv_c = 3;
 	return (stats);
 }
 

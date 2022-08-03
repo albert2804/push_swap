@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/02 16:11:48 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/03 17:53:56 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,16 +28,17 @@ HEADER_PATH = header
 LIB_PATH = lib
 SRC_PATH = src
 OBJ_PATH = obj
+C_FLAGS = #-Wall -Wextra -Werror
 
 all:  library obj $(NAME)
 
 obj: $(OBJ)
 
 %.o : %.c
-	cc -Wall -Wextra -Werror -I$(HEADER_PATH) -c $^ 
+	cc $(C_FLAGS) -I$(HEADER_PATH) -c $^ 
 	
 $(NAME): $(OBJ)
-	cc -Wall -Wextra -Werror -I$(HEADER_PATH) $(COMPILED_SRC) $^ -L$(LIB_PATH) -lft -o $(NAME)
+	cc $(C_FLAGS) -I$(HEADER_PATH) $(COMPILED_SRC) $^ -L$(LIB_PATH) -lft -o $(NAME)
 
 library:
 #	@echo MAKE LIBFT
