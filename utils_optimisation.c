@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:29:02 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 11:19:18 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:28:59 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,21 @@ int	optimal_pivot_value(char **argv, int argc, int i)
 	t_status	*stats;
 
 	opt_op_count = 0;
-	op_counts = malloc(sizeof(int) * (30 - 3 + 1));
-	while (i <= (30 - 3))
+	op_counts = malloc(sizeof(int) * (30 - 5 + 1));
+	while (i <= (30 - 5))
 	{
 		lst_a = NULL;
 		lst_b = NULL;
 		lst_a = read_in(lst_a, argc, argv);
 		lst_a = index_list(lst_a);
 		stats = init_struct(lst_a);
-		stats->piv_c = 3 + i;
+		stats->piv_c = 5 + i;
 		sort(&lst_a, &lst_b, stats);
 		op_counts[i++] = stats->op_c;
 		free (stats);
-		free(lst_a);
-		free(lst_b);
+		ft_lstclear_ps(&lst_a);
+		ft_lstclear_ps(&lst_b);
 	}
-	opt_op_count = find_min_int(op_counts, 18, 15);
+	opt_op_count = find_min_int(op_counts, 30, 5);
 	return (opt_op_count);
 }

@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 10:56:09 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:08:49 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int			rotate_or_rrotate(t_list_ps *lst_b, int index);
 int			find_max_index(t_list_ps *lst_b);
 int			check_for_push(t_list_ps *lst_b);
 void		free_list(t_list_ps *lst);
+void		ft_lstclear_ps(t_list_ps **lst);
+void		ft_lstdelone_ps(t_list_ps *lst);
 
 //PIVOT
 int			*pivotvalues(t_status *stats);

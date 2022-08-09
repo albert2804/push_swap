@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:31:15 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 10:52:54 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:30:13 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_status	*init_struct(t_list_ps *lst_a)
 {
 	t_status	*stats;
 
-	stats = malloc(sizeof(t_status));
+	stats = ft_calloc(sizeof(t_status), 1);
 	stats->lsta_c = list_count(lst_a);
 	stats->piv_c = 0;
 	stats->p_f = 0;
@@ -47,6 +47,7 @@ int	count_descending_max_values(t_list_ps *lst_b)
 	count = 0;
 	while (1)
 	{
+		// ft_printf("findmax");
 		if (lst_b->index - compare_value == 1)
 		{
 			compare_value = lst_b->index;
@@ -75,6 +76,7 @@ int	*build_max_values(int *max_values, int comp_val, t_list_ps *lst_b)
 	i = 0;
 	while (1)
 	{
+		// ft_printf("buildmax");
 		if (lst_b->index - comp_val == 1)
 		{
 			max_values[i] = comp_val;
@@ -109,7 +111,7 @@ int	*descending_max_values(t_list_ps *lst_b)
 	int	*max_values;
 
 	count_max_values = count_descending_max_values(lst_b);
-	max_values = ft_calloc(count_max_values + 1, sizeof(int));
+	max_values = ft_calloc(count_max_values + 1, sizeof(int *));
 	if (count_max_values == 0)
 	{
 		max_values[0] = find_max_index(lst_b);

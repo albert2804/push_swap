@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:36:55 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:13:33 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list_ps	*ft_lstnew_ps(int content, int indx)
 {
 	t_list_ps	*list;
 
-	list = malloc(sizeof(t_list_ps));
+	list = ft_calloc(sizeof(t_list_ps), 1);
 	if (!list)
 		return (NULL);
 	list->content = content;
@@ -37,10 +37,12 @@ void	ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new)
 
 t_list_ps	*ft_lstlast_ps(t_list_ps *lst)
 {
+	//int i = 0;
 	if (!lst)
 		return (NULL);
 	while (lst->next != NULL)
 	{
+		// ft_printf("I: %d", i++);
 		lst = lst -> next;
 	}
 	return (lst);

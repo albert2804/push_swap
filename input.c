@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 11:23:15 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:34:59 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,6 @@ t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv)
 	int			i;
 
 	i = 0;
-	if (nbr_arg == 1)
-	{
-		ft_printf("Error");
-		exit(0);
-	}
 	while (++i < nbr_arg)
 		lst_a = build_stack_from_argv(lst_a, argv[i]);
 	return (lst_a);

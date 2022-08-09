@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:54:15 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:24:34 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	list_count(t_list_ps *lst)
 	temp = lst;
 	while (temp->next != NULL)
 	{
+		// ft_printf("listcount");
 		i++;
 		temp = temp->next;
 	}	
@@ -77,6 +78,7 @@ int	rotate_or_rrotate(t_list_ps *lst_b, int index)
 	lcount = list_count(lst_b);
 	while (lst_b->index != index)
 	{
+		// ft_printf("oprr");
 		lst_b = lst_b->next;
 		count ++;
 	}

@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/09 11:44:58 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/09 16:11:07 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,13 @@ SRC = 	utils_libft.c\
 		utils_optimisation.c\
 		utils.c\
 		utils2.c\
+		utils3.c\
 		rotate.c\
 		swap.c\
 		push.c\
 		input.c
 
-INPUT = 274 3 14 488 86 157
+INPUT = 20 68 5 42 26 33 81 61 31 
 
 OBJ  = $(SRC:.c=.o)
 

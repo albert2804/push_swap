@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 17:23:52 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:58:09 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int	*pivotvalues(t_status *stats)
 	int	i;
 
 	i = 1;
-	pivot_values = malloc(sizeof(int) * stats->piv_c);
+	pivot_values = ft_calloc(sizeof(int *), stats->piv_c);
 	pivot_values[0] = stats->lsta_c / (stats->piv_c + 1);
 	while (i < stats->piv_c)
 	{
+		// ft_printf("p_val1");
 		pivot_values[i] = stats->lsta_c / (stats->piv_c + 1) * (i + 1);
 		i++;
 	}
@@ -59,6 +60,7 @@ void	p_val(t_list_ps **l_a, t_list_ps **l_b, int *mx_val, t_status *sts)
 	i = 0;
 	while (i <= sts->count_max_val)
 	{
+		// ft_printf("p_val1");
 		if ((*l_b)->index == mx_val[i] && i != sts->count_max_val)
 		{
 			sts->op_c = sts->op_c + push_a(l_a, l_b, sts->p_f);
@@ -76,5 +78,8 @@ void	p_val(t_list_ps **l_a, t_list_ps **l_b, int *mx_val, t_status *sts)
 			sts->op_c = sts->op_c + rotate_rev_b(l_b, sts->p_f);
 	}
 	while (--i > 0)
+	{
 		sts->op_c = sts->op_c + rotate_rev_a(l_a, sts->p_f);
+	// ft_printf("p_val2");
+	}
 }

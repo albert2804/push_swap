@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:16:23 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 11:48:48 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:10:15 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,36 @@
 int	rotate_a(t_list_ps **lst, int print_flag)
 {
 	t_list_ps	*first;
+	t_list_ps	*tmp;
 
-	first = ft_lstnew_ps((*lst)->content, (*lst)->index);
-	free(*lst);
-	(*lst) = (*lst)->next;
-	ft_lstadd_back_ps(lst, first);
-	if (print_flag == 1)
-		ft_printf("ra\n");
+	if ((*lst)->next)
+	{
+		tmp = *lst;
+		first = ft_lstnew_ps((*lst)->content, (*lst)->index);
+		ft_lstadd_back_ps(lst, first);
+		(*lst) = (*lst)->next;
+		free(tmp);
+		if (print_flag == 1)
+			ft_printf("ra\n");
+	}
 	return (1);
 }
 
 int	rotate_b(t_list_ps **lst, int print_flag)
 {
 	t_list_ps	*first;
+	t_list_ps	*tmp;
 
-	first = ft_lstnew_ps((*lst)->content, (*lst)->index);
-	free(*lst);
-	(*lst) = (*lst)->next;
-	ft_lstadd_back_ps(lst, first);
-	if (print_flag == 1)
-		ft_printf("rb\n");
+	if ((*lst)->next)
+	{
+		tmp = *lst;
+		first = ft_lstnew_ps((*lst)->content, (*lst)->index);
+		ft_lstadd_back_ps(lst, first);
+		(*lst) = (*lst)->next;
+		free(tmp);
+		if (print_flag == 1)
+			ft_printf("rb\n");
+	}
 	return (1);
 }
 
@@ -66,6 +76,7 @@ int	rotate_rev_b(t_list_ps **lst, int print_flag)
 	ft_lstadd_front_ps(lst, last);
 	while (temp->next != last)
 	{
+		// ft_printf("revb");
 		temp = temp->next;
 	}	
 	temp->next = NULL;

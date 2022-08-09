@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:54:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 11:07:57 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:23:33 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	find_max_index(t_list_ps *lst_b)
 	value = 0;
 	while (lst_b)
 	{
+		// ft_printf("max_iindex");
 		if (lst_b->index > value)
 			value = lst_b->index;
 		lst_b = lst_b->next;
