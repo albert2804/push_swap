@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:54:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 17:10:28 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:07:57 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ t_list_ps	*index_list(t_list_ps *lst)
 {
 	int			threshold;
 	int			indx;
-	t_list_ps	*tmp;
+	//t_list_ps	*tmp;
 	int			count;
 
 	indx = 1;
 	count = list_count(lst);
-	tmp = lst;
+	//tmp = lst;
 	while (indx <= count + 1)
 	{
 		threshold = threshold_for_index_func(lst);
-		tmp = index_elem(lst, threshold, indx);
+		lst = index_elem(lst, threshold, indx);
 		indx++;
 	}
 	return (lst);

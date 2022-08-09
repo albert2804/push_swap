@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/03 19:46:41 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 10:56:09 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ typedef struct s_status
 	int	min_piv_c;
 	int	i;	
 }					t_status;
+
+typedef struct s_print
+{
+	char				*content;
+	struct s_print		*next;
+}					t_print;
+
 //INPUT FUNCTIONS
 t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str);
 t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv);
@@ -72,6 +79,7 @@ int			list_count(t_list_ps *lst);
 int			rotate_or_rrotate(t_list_ps *lst_b, int index);
 int			find_max_index(t_list_ps *lst_b);
 int			check_for_push(t_list_ps *lst_b);
+void		free_list(t_list_ps *lst);
 
 //PIVOT
 int			*pivotvalues(t_status *stats);
@@ -79,6 +87,7 @@ void		pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
 int			rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag);
 int			find_min_int(int *int_list, int max_c, int min_c);
 int			optimal_pivot_value(char **argv, int argc, int i);
+
 //SORT
 int			count_descending_max_values(t_list_ps *lst_b);
 int			*build_max_values(int *max_values, int comp_val, t_list_ps *lst_b);

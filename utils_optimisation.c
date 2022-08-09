@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:29:02 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:29:29 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:19:18 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	optimal_pivot_value(char **argv, int argc, int i)
 		free(lst_a);
 		free(lst_b);
 	}
-	opt_op_count = find_min_int(op_counts, 30, 3);
+	opt_op_count = find_min_int(op_counts, 18, 15);
 	return (opt_op_count);
 }

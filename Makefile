@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/09 09:33:18 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/09 11:44:58 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,23 +24,25 @@ SRC = 	utils_libft.c\
 		push.c\
 		input.c
 
+INPUT = 274 3 14 488 86 157
+
 OBJ  = $(SRC:.c=.o)
 
 HEADER_PATH = header
 LIB_PATH = lib
 SRC_PATH = src
 OBJ_PATH = obj
-C_FLAGS = #-Wall -Wextra -Werror
+C_FLAGS = -Wall -Wextra -Werror
 
 all:  library obj $(NAME)
 
 obj: $(OBJ)
 
 %.o : %.c
-	cc $(C_FLAGS) -I$(HEADER_PATH) -c $^ 
+	gcc -g $(C_FLAGS) -I$(HEADER_PATH)  -c $^ 
 	
 $(NAME): $(OBJ)
-	cc $(C_FLAGS) -I$(HEADER_PATH) $(COMPILED_SRC) $^ -L$(LIB_PATH) -lft -o $(NAME)
+	gcc -g $(C_FLAGS) -I$(HEADER_PATH) $(OBJ) -L$(LIB_PATH) -lft -o $(NAME)
 
 library:
 #	@echo MAKE LIBFT
@@ -48,6 +50,9 @@ library:
 	
 #	@echo MAKE PRINTF
 	@make all -C	$(SRC_PATH)/ft_printf
+
+val:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(INPUT)
 
 move:
 	@make move -C	$(SRC_PATH)/libft
@@ -58,13 +63,13 @@ move:
 clean:
 	@make clean -C $(SRC_PATH)/libft
 	@make clean -C $(SRC_PATH)/ft_printf
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(NAME)
 	@echo Objectfiles removed
 
 fclean: clean
 	@make fclean -C $(SRC_PATH)/libft
 	@make fclean -C $(SRC_PATH)/ft_printf
-	@rm -f $(NAME)
+	@rm -f $(OBJ) $(NAME)
 	@echo Libraries and exeutables removed
 	
 re: fclean all

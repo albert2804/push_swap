@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:31:15 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:36:41 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 10:52:54 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,13 @@ int	sort_check(t_list_ps *lst_a)
 		temp = temp->next;
 	}
 	return (1);
+}
+
+void	free_list(t_list_ps *lst)
+{
+	while (lst)
+	{
+		free(lst);
+		lst = lst->next;
+	}
 }

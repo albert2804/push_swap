@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:35:40 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:43:19 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,12 @@ void	sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 */
 void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
-	int	check;
 	int	index_lsta;
 	int	*pivot_array;
 	int	i;
 
 	i = 0;
 	pivot_array = pivotvalues(stats);
-	check = 0;
 	index_lsta = list_count(*lst_a);
 	while (i < stats->piv_c)
 	{
@@ -98,16 +96,18 @@ int	main(int argc, char **argv)
 	t_status	*stats;
 	int			a;
 
-	a = optimal_pivot_value(argv, argc, 0);
+	// a = optimal_pivot_value(argv, argc, 0);
+	a = 3;
 	lst_a = NULL;
 	lst_b = NULL;
 	lst_a = read_in(lst_a, argc, argv);
 	lst_a = index_list(lst_a);
 	stats = init_struct(lst_a);
 	stats->piv_c = a;
-	stats->p_f = 1;
+	stats->p_f = 0;
 	sort(&lst_a, &lst_b, stats);
-	ft_printf("%d", stats->op_c);
+	ft_printf("%d", stats->op_c); //delete this line for eval
 	free (stats);
+	system("leaks push_swap");
 	return (0);
 }

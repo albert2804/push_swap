@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:26:37 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:23:15 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str)
 		elem = ft_atoi(split_str[i]);
 		new_node = ft_lstnew_ps(elem, 0);
 		ft_lstadd_back_ps(&lst_a, new_node);
+		free(split_str[i]);
 		i ++;
 	}
 	free(split_str);

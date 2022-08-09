@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:35:58 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:54:15 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	printlist(t_list_ps *lst)
 		ft_printf("%d->", tmp->content);
 		tmp = tmp->next;
 	}
-	//free (tmp);
+	// free (tmp);
 	ft_printf("NULLL\n");
 }
 
@@ -36,7 +36,7 @@ void	printindex(t_list_ps *lst)
 		ft_printf("%d->", tmp->index);
 		tmp = tmp->next;
 	}
-	//free (tmp);
+	// free (tmp);
 	ft_printf("NULL\n");
 }
 
