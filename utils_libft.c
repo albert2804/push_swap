@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/03 18:19:25 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:36:55 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	ft_lstadd_back_ps(t_list_ps **lst, t_list_ps *new)
 {
 	t_list_ps	*lst_tmp;
 
-	// if (!*lst || !new) //otherwise an empty list has to be malloced.
 	if (!*lst && !new)
 		return ;
 	if (!*lst)

@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/03 17:53:56 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/09 09:33:18 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ SRC = 	utils_libft.c\
 		push_swap.c\
 		utils_index.c\
 		utils_quicksort.c\
+		utils_optimisation.c\
 		utils.c\
+		utils2.c\
 		rotate.c\
 		swap.c\
 		push.c\

@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/03 18:29:46 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:26:37 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str)
 		i ++;
 	}
 	free(split_str);
-	return(lst_a);
+	return (lst_a);
 }
 
 // void	build_stack_from_argv(t_list_ps **lst_a, char *str)
@@ -74,7 +74,7 @@ input:
 2) ./test.out $arg
 Either work with double pointer or return value
 */
-t_list_ps *read_in(t_list_ps *lst_a, int nbr_arg, char **argv)
+t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv)
 {
 	int			i;
 
