@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:31:15 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 15:30:13 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/11 12:47:13 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ t_status	*init_struct(t_list_ps *lst_a)
 	stats->piv1 = 0;
 	stats->piv2 = 0;
 	stats->count_max_val = 0;
-	stats->max_piv_c = 30;
-	stats->min_piv_c = 3;
 	return (stats);
 }
 
@@ -47,7 +45,6 @@ int	count_descending_max_values(t_list_ps *lst_b)
 	count = 0;
 	while (1)
 	{
-		// ft_printf("findmax");
 		if (lst_b->index - compare_value == 1)
 		{
 			compare_value = lst_b->index;
@@ -68,6 +65,7 @@ int	count_descending_max_values(t_list_ps *lst_b)
 /*
 this function is used for building the max_values array.
 Kind of sourcing out bc of norminette
+
 */
 int	*build_max_values(int *max_values, int comp_val, t_list_ps *lst_b)
 {
@@ -76,7 +74,6 @@ int	*build_max_values(int *max_values, int comp_val, t_list_ps *lst_b)
 	i = 0;
 	while (1)
 	{
-		// ft_printf("buildmax");
 		if (lst_b->index - comp_val == 1)
 		{
 			max_values[i] = comp_val;
@@ -111,7 +108,7 @@ int	*descending_max_values(t_list_ps *lst_b)
 	int	*max_values;
 
 	count_max_values = count_descending_max_values(lst_b);
-	max_values = ft_calloc(count_max_values + 1, sizeof(int *));
+	max_values = ft_calloc((count_max_values + 10), sizeof(int *));
 	if (count_max_values == 0)
 	{
 		max_values[0] = find_max_index(lst_b);
@@ -140,13 +137,4 @@ int	sort_check(t_list_ps *lst_a)
 		temp = temp->next;
 	}
 	return (1);
-}
-
-void	free_list(t_list_ps *lst)
-{
-	while (lst)
-	{
-		free(lst);
-		lst = lst->next;
-	}
 }

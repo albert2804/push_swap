@@ -6,11 +6,12 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/09 16:11:07 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/15 17:19:46 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+#MAKEFILE += --no-builtin-rules
 
 SRC = 	utils_libft.c\
 		push_swap.c\
@@ -25,7 +26,7 @@ SRC = 	utils_libft.c\
 		push.c\
 		input.c
 
-INPUT = 20 68 5 42 26 33 81 61 31 
+INPUT = 1
 
 OBJ  = $(SRC:.c=.o)
 
@@ -64,13 +65,13 @@ move:
 clean:
 	@make clean -C $(SRC_PATH)/libft
 	@make clean -C $(SRC_PATH)/ft_printf
-	@rm -f $(OBJ) $(NAME)
+	@rm -f $(OBJ) $(OBJ_TEST) $(NAME)
 	@echo Objectfiles removed
 
 fclean: clean
 	@make fclean -C $(SRC_PATH)/libft
 	@make fclean -C $(SRC_PATH)/ft_printf
-	@rm -f $(OBJ) $(NAME)
+	@rm -f $(TEST) $(NAME)
 	@echo Libraries and exeutables removed
 	
 re: fclean all

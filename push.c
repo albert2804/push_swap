@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:16:29 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 14:45:06 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/11 12:45:56 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	push_a(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
 	t_list_ps	*tmp;
 
 	elem = ft_lstnew_ps((*lst_b)->content, (*lst_b)->index);
-	// elem->next = (*lst_a);
-	// (*lst_a) = elem;
 	ft_lstadd_front_ps(lst_a, elem);
 	if ((*lst_b)->next)
 	{
@@ -40,9 +38,6 @@ int	push_b(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
 	tmp = *lst_a;
 	elem = ft_lstnew_ps((*lst_a)->content, (*lst_a)->index);
 	ft_lstadd_front_ps(lst_b, elem);
-	// elem->next = (*lst_b);
-	// (*lst_b) = elem;
-	//free(tmp);
 	if ((*lst_a)->next)
 	{
 		tmp = *lst_a;
@@ -52,4 +47,25 @@ int	push_b(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
 	if (print_flag == 1)
 		ft_printf("pb\n");
 	return (1);
+}
+
+int	pa_rr(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
+{
+	push_a(lst_a, lst_b, print_flag);
+	rrab(lst_a, lst_b, print_flag);
+	return (2);
+}
+
+int	pb_rr(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
+{
+	push_b(lst_a, lst_b, print_flag);
+	rrab(lst_a, lst_b, print_flag);
+	return (2);
+}
+
+int	pb_rb(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag)
+{
+	push_b(lst_a, lst_b, print_flag);
+	rotate_b(lst_b, print_flag);
+	return (2);
 }

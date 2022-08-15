@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 15:13:33 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:10:26 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ void	ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new)
 
 t_list_ps	*ft_lstlast_ps(t_list_ps *lst)
 {
-	//int i = 0;
 	if (!lst)
 		return (NULL);
 	while (lst->next != NULL)
 	{
-		// ft_printf("I: %d", i++);
 		lst = lst -> next;
 	}
 	return (lst);

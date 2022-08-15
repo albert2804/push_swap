@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:16:23 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 16:10:15 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:56:37 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,20 @@ int	rotate_rev_a(t_list_ps **lst, int print_flag)
 	t_list_ps	*last;
 	t_list_ps	*temp;
 
-	last = ft_lstlast_ps(*lst);
-	temp = *lst;
-	ft_lstadd_front_ps(lst, last);
-	while (temp->next != last)
+	if ((*lst)->next)
 	{
-		temp = temp->next;
-	}	
-	temp->next = NULL;
-	if (print_flag == 1)
-		ft_printf("rra\n");
-	return (1);
+		last = ft_lstlast_ps(*lst);
+		temp = *lst;
+		ft_lstadd_front_ps(lst, last);
+		while (temp->next != last)
+			temp = temp->next;
+		temp->next = NULL;
+		if (print_flag == 1)
+			ft_printf("rra\n");
+		return (1);
+	}
+	else
+		return (0);
 }
 
 int	rotate_rev_b(t_list_ps **lst, int print_flag)
@@ -71,18 +74,22 @@ int	rotate_rev_b(t_list_ps **lst, int print_flag)
 	t_list_ps	*last;
 	t_list_ps	*temp;
 
-	last = ft_lstlast_ps(*lst);
-	temp = *lst;
-	ft_lstadd_front_ps(lst, last);
-	while (temp->next != last)
+	if ((*lst)->next)
 	{
-		// ft_printf("revb");
-		temp = temp->next;
-	}	
-	temp->next = NULL;
-	if (print_flag == 1)
-		ft_printf("rrb\n");
-	return (1);
+		last = ft_lstlast_ps(*lst);
+		temp = *lst;
+		ft_lstadd_front_ps(lst, last);
+		while (temp->next != last)
+		{
+			temp = temp->next;
+		}	
+		temp->next = NULL;
+		if (print_flag == 1)
+			ft_printf("rrb\n");
+		return (1);
+	}
+	else
+		return (0);
 }
 
 int	rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag)

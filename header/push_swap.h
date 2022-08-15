@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 15:08:49 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:32:40 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ typedef struct s_print
 //INPUT FUNCTIONS
 t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str);
 t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv);
-// void		build_stack_from_argv(t_list_ps **lst_a, char *str);
-// void		read_in(t_list_ps **lst_a, int nbr_arg, char **argv);
 char		**read_input(char *str);
+int			check_if_wrong(int nbr_arg, char **argv);
 
 //LIBFT-FUNCTIONS
 void		ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
@@ -68,6 +67,9 @@ int			rotate_a(t_list_ps **lst, int print_flag);
 int			rotate_b(t_list_ps **lst, int print_flag);
 int			rotate_rev_a(t_list_ps **lst, int print_flag);
 int			rotate_rev_b(t_list_ps **lst, int print_flag);
+int			pb_rr(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
+int			pa_rr(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
+int			pb_rb(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
 
 //UTILS
 t_status	*init_struct(t_list_ps *lst_a);
@@ -97,5 +99,10 @@ int			*descending_max_values(t_list_ps *lst_b);
 void		sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
 void		p_val(t_list_ps **l_a, t_list_ps **l_b, int *mx_val, t_status *sts);
 void		sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
+void		sort_3digit_stack(t_list_ps **lst_a, t_status *stats);
+void		sort_small_stack(t_list_ps **lst_a, t_status *stats);
+
+//TEST
+int			pivgroup_pushed(t_list_ps **lst, int piv_2);
 
 #endif

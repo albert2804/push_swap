@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 16:03:28 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:13:04 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,24 @@ void	pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 
 	count_lsta = 0;
 	len_lsta = list_count(*lst_a);
-	while (count_lsta < len_lsta)
+	while (pivgroup_pushed(lst_a, stats->piv2) == 0 && count_lsta++ < len_lsta)
 	{
 		if ((*lst_a)->index >= stats->piv1 && (*lst_a)->index <= stats->piv2)
 			stats->op_c = stats->op_c + push_b(lst_a, lst_b, stats->p_f);
+		else if ((*lst_a)->index < stats->piv1 && \
+		(*lst_a)->next->index > stats->piv2)
+			stats->op_c = stats->op_c + pb_rr(lst_a, lst_b, stats->p_f);
 		else if ((*lst_a)->index < stats->piv1)
-		{
-			stats->op_c = stats->op_c + push_b(lst_a, lst_b, stats->p_f);
-			stats->op_c = stats->op_c + rotate_b(lst_b, stats->p_f);
-		}
-		// else if ((*lst_a)->index > len_lsta - 3)
-		// 	stats->op_c = stats->op_c + rotate_a(lst_a, stats->p_f);
+			stats->op_c = stats->op_c + pb_rb(lst_a, lst_b, stats->p_f);
 		else
 			stats->op_c = stats->op_c + rotate_a(lst_a, stats->p_f);
-		count_lsta ++;
 	}
 }
 
 void	sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
 	int	*max_values;
-	
+
 	while ((*lst_b)->next)
 	{
 		stats->count_max_val = count_descending_max_values(*lst_b);
@@ -65,30 +62,45 @@ void	sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 		push_a(lst_a, lst_b, stats->p_f);
 }
 
+void	sort_small_stack(t_list_ps **lst_a, t_status *stats)
+{
+	if (stats->lsta_c > 2)
+		sort_3digit_stack(lst_a, stats);
+	else if ((*lst_a)->index > (*lst_a)->next->index)
+		swap_a(lst_a, stats->p_f);
+}
+
 /*
 	i = i + 2; // use this to pivot the stack mirrored
 	i++; // use this to pivot the stack descending
 */
 void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
-	int	index_lsta;
 	int	*pivot_array;
 	int	i;
 
 	i = 0;
 	pivot_array = pivotvalues(stats);
-	index_lsta = list_count(*lst_a);
-	while (i < stats->piv_c)
+	if (stats->lsta_c >= 32)
 	{
-		stats->piv1 = pivot_array[i];
-		stats->piv2 = pivot_array[i + 1];
-		pivotisation(lst_a, lst_b, stats);
-		i = i + 2;
+		while (i < stats->piv_c)
+		{
+			stats->piv1 = pivot_array[i];
+			stats->piv2 = pivot_array[i + 1];
+			pivotisation(lst_a, lst_b, stats);
+			i = i + 2;
+		}
 	}
-	stats->piv1 = pivot_array[i + 1];
-	stats->piv2 = index_lsta;
-	pivotisation(lst_a, lst_b, stats);
-	sortpivgroup(lst_a, lst_b, stats);
+		stats->piv1 = pivot_array[i + 1];
+		stats->piv2 = stats->lsta_c - 3;
+	if (stats->lsta_c > 3)
+		pivotisation(lst_a, lst_b, stats);
+	if (stats->lsta_c > 1)
+		sort_small_stack(lst_a, stats);
+	else
+		return (free(pivot_array));
+	if (stats->lsta_c > 3)
+		sortpivgroup(lst_a, lst_b, stats);
 	free(pivot_array);
 }
 
@@ -101,8 +113,10 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		exit(0);
+	int i;
+	i = check_if_wrong(argc, argv);
+	ft_printf("%d", i);
 	a = optimal_pivot_value(argv, argc, 0);
-	//a = 5;
 	lst_a = NULL;
 	lst_b = NULL;
 	lst_a = read_in(lst_a, argc, argv);
@@ -111,10 +125,10 @@ int	main(int argc, char **argv)
 	stats->piv_c = a;
 	stats->p_f = 1;
 	sort(&lst_a, &lst_b, stats);
-	//ft_printf("%d", stats->op_c); //delete this line for eval
+	// ft_printf("%d", stats->op_c); //delete this line for eval
 	free (stats);
 	ft_lstclear_ps(&lst_a);
 	ft_lstclear_ps(&lst_b);
-	// system("leaks push_swap");
+	//system("leaks push_swap");
 	return (0);
 }

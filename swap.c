@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:16:32 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/02 17:09:05 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:58:04 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,19 @@ int	swap_a(t_list_ps **lst, int print_flag)
 	t_list_ps	*node1;
 	t_list_ps	*node2;
 
-	node1 = (*lst);
-	node2 = (*lst)->next;
-	swap_nodes(node1, node2);
-	(*lst) = node2;
-	(*lst)->next = node1;
-	if (print_flag == 1)
-		ft_printf("sa\n");
-	return (1);
+	if ((*lst)->next)
+	{
+		node1 = (*lst);
+		node2 = (*lst)->next;
+		swap_nodes(node1, node2);
+		(*lst) = node2;
+		(*lst)->next = node1;
+		if (print_flag == 1)
+			ft_printf("sa\n");
+		return (1);
+	}
+	else
+		return (0);
 }
 
 int	swap_b(t_list_ps **lst, int print_flag)
@@ -41,12 +46,17 @@ int	swap_b(t_list_ps **lst, int print_flag)
 	t_list_ps	*node1;
 	t_list_ps	*node2;
 
-	node1 = (*lst);
-	node2 = (*lst)->next;
-	swap_nodes(node1, node2);
-	(*lst) = node2;
-	(*lst)->next = node1;
-	if (print_flag == 1)
-		ft_printf("sb\n");
-	return (1);
+	if ((*lst)->next)
+	{
+		node1 = (*lst);
+		node2 = (*lst)->next;
+		swap_nodes(node1, node2);
+		(*lst) = node2;
+		(*lst)->next = node1;
+		if (print_flag == 1)
+			ft_printf("sb\n");
+		return (1);
+	}
+	else
+		return (0);
 }
