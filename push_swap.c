@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/15 18:13:04 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:31:32 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		exit(0);
 	int i;
-	i = check_if_wrong(argc, argv);
+	i = check_if_wrong_or_sorted(argc, argv);
 	ft_printf("%d", i);
 	a = optimal_pivot_value(argv, argc, 0);
 	lst_a = NULL;

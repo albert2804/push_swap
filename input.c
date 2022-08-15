@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/15 18:27:35 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:31:54 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv)
 	return (lst_a);
 }
 
-int	check_if_wrong(int nbr_arg, char **argv)
+int	check_if_wrong_or_sorted(int nbr_arg, char **argv)
 {
 	t_list_ps	*lst_a;
 	t_list_ps	*head;

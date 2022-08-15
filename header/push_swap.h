@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/15 17:32:40 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:31:47 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_print
 t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str);
 t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv);
 char		**read_input(char *str);
-int			check_if_wrong(int nbr_arg, char **argv);
+int			check_if_wrong_or_sorted(int nbr_arg, char **argv);
 
 //LIBFT-FUNCTIONS
 void		ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
