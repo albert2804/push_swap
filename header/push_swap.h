@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 14:14:42 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/17 18:01:03 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,24 @@ void		ft_lstadd_back_ps(t_list_ps **lst, t_list_ps *new);
 t_list_ps	*ft_lstnew_ps(int content, int indx);
 t_list_ps	*ft_lstlast_ps(t_list_ps *lst);
 t_list_ps	*index_list(t_list_ps *lst);
+
+//OPERATIONS
 void		swap_nodes(t_list_ps *node1, t_list_ps *node2);
 int			swap_a(t_list_ps **lst, int print_flag);
 int			swap_b(t_list_ps **lst, int print_flag);
+int			sswap(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
 int			push_a(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
 int			push_b(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
 int			rotate_a(t_list_ps **lst, int print_flag);
 int			rotate_b(t_list_ps **lst, int print_flag);
 int			rotate_rev_a(t_list_ps **lst, int print_flag);
 int			rotate_rev_b(t_list_ps **lst, int print_flag);
+int			rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag);
+int			rrrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag);
 int			pb_rr(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
 int			pa_rr(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
 int			pb_rb(t_list_ps **lst_a, t_list_ps **lst_b, int print_flag);
+int			commands(char *line, t_list_ps **lst_a, t_list_ps **lst_b);
 
 //UTILS
 t_status	*init_struct(t_list_ps *lst_a);
@@ -92,7 +98,6 @@ void		ft_lstdelone_ps(t_list_ps *lst);
 //PIVOT
 int			*pivotvalues(t_status *stats);
 void		pivotisation(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
-int			rrab(t_list_ps **lsta, t_list_ps **lstb, int print_flag);
 int			find_min_int(int *int_list, int max_c, int min_c);
 int			optimal_pivot_value(char **argv, int argc, int i);
 

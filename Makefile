@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/17 14:46:48 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/17 18:49:57 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,12 @@ SRC_B = utils_libft.c\
 		push.c\
 		input.c\
 		sort.c\
+		src/gnl/get_next_line_utils.c\
+		src/gnl/get_next_line.c\
 		checker.c
 
 
-INPUT = 1 2 3 5 4
+INPUT = 22 2 27 11 39 30 19 6 17 24 4 23 26 29 12 3 7 40 38 9 8 21 16 1 28 36 31 13 25 15 10 33 20 35 5 18 32 37 34 14 
 
 OBJ   = $(SRC:.c=.o)
 OBJ_B = $(SRC_B:.c=.o)
@@ -61,7 +63,7 @@ obj: $(OBJ)
 obj_b: $(OBJ_B)
 
 %.o : %.c
-	gcc -g $(C_FLAGS) -I$(HEADER_PATH) -c $^ 
+	gcc -g $(C_FLAGS) -I$(HEADER_PATH) -c $^
 	
 $(NAME): $(OBJ)
 	gcc -g $(C_FLAGS) -I$(HEADER_PATH) $(OBJ) -L$(LIB_PATH) -lft -o $(NAME)
@@ -76,6 +78,9 @@ library:
 #	@echo MAKE PRINTF
 	@make all -C	$(SRC_PATH)/ft_printf
 
+#	@echo MAKE GNL	
+	@make all -C	$(SRC_PATH)/gnl
+	
 val:
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(INPUT)
 
@@ -86,8 +91,6 @@ move:
 	@echo Moved Objectfiles into /$(OBJ_PATH)
 
 clean:
-	@make clean -C $(SRC_PATH)/libft
-	@make clean -C $(SRC_PATH)/ft_printf
 	@rm -f $(OBJ) $(OBJ_B) $(NAME) $(BONUS)
 	@echo Objectfiles removed
 

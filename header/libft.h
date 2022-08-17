@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/09 09:37:11 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:27:30 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <ft_printf.h>
 # include <push_swap.h>
+# include <get_next_line.h>
 
 typedef struct s_list
 {
