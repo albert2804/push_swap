@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:05:28 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/15 16:33:48 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:14:52 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,19 @@ void	sort_3digit_stack(t_list_ps **lst_a, t_status *stats)
 	else if ((*lst_a)->index == stats->lsta_c && \
 	(*lst_a)->next->index == stats->lsta_c - 2)
 		stats->op_c = stats->op_c + rotate_a(lst_a, stats->p_f);
+}
+
+int	ft_strisdigit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]) == 1 || str[0] == '-')
+			i ++;
+		else
+			return (0);
+	}
+	return (1);
 }

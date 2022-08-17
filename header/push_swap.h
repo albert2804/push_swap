@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/15 18:31:47 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:14:42 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <libft.h>
+# include <limits.h>
+# include <stdint.h>
 
 //STRUCTS
 typedef struct s_list_ps
@@ -50,7 +52,9 @@ typedef struct s_print
 t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str);
 t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv);
 char		**read_input(char *str);
-int			check_if_wrong_or_sorted(int nbr_arg, char **argv);
+int			check_wrong_or_sorted(int n, char **a, t_list_ps *l, t_list_ps *h);
+int			ft_strisdigit(char *str);
+void		ft_free_split(char **str);
 
 //LIBFT-FUNCTIONS
 void		ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
@@ -98,7 +102,7 @@ int			*build_max_values(int *max_values, int comp_val, t_list_ps *lst_b);
 int			*descending_max_values(t_list_ps *lst_b);
 void		sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
 void		p_val(t_list_ps **l_a, t_list_ps **l_b, int *mx_val, t_status *sts);
-void		sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats);
+void		sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats, int i);
 void		sort_3digit_stack(t_list_ps **lst_a, t_status *stats);
 void		sort_small_stack(t_list_ps **lst_a, t_status *stats);
 

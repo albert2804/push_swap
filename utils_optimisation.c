@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:29:02 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/11 13:50:01 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:02:04 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	optimal_pivot_value(char **argv, int argc, int i)
 		lst_a = index_list(lst_a);
 		stats = init_struct(lst_a);
 		stats->piv_c = 2 + i;
-		sort(&lst_a, &lst_b, stats);
+		sort(&lst_a, &lst_b, stats, 0);
 		op_counts[i++] = stats->op_c;
 		free (stats);
 		ft_lstclear_ps(&lst_a);

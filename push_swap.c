@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/15 18:31:32 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:13:20 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,10 @@ void	sort_small_stack(t_list_ps **lst_a, t_status *stats)
 	i = i + 2; // use this to pivot the stack mirrored
 	i++; // use this to pivot the stack descending
 */
-void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
+void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats, int i)
 {
 	int	*pivot_array;
-	int	i;
 
-	i = 0;
 	pivot_array = pivotvalues(stats);
 	if (stats->lsta_c >= 32)
 	{
@@ -91,8 +89,8 @@ void	sort(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 			i = i + 2;
 		}
 	}
-		stats->piv1 = pivot_array[i + 1];
-		stats->piv2 = stats->lsta_c - 3;
+	stats->piv1 = pivot_array[i + 1];
+	stats->piv2 = stats->lsta_c - 3;
 	if (stats->lsta_c > 3)
 		pivotisation(lst_a, lst_b, stats);
 	if (stats->lsta_c > 1)
@@ -111,11 +109,8 @@ int	main(int argc, char **argv)
 	t_status	*stats;
 	int			a;
 
-	if (argc == 1)
+	if ((argc == 1) || check_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
 		exit(0);
-	int i;
-	i = check_if_wrong_or_sorted(argc, argv);
-	ft_printf("%d", i);
 	a = optimal_pivot_value(argv, argc, 0);
 	lst_a = NULL;
 	lst_b = NULL;
@@ -124,11 +119,9 @@ int	main(int argc, char **argv)
 	stats = init_struct(lst_a);
 	stats->piv_c = a;
 	stats->p_f = 1;
-	sort(&lst_a, &lst_b, stats);
-	// ft_printf("%d", stats->op_c); //delete this line for eval
+	sort(&lst_a, &lst_b, stats, 0);
 	free (stats);
 	ft_lstclear_ps(&lst_a);
 	ft_lstclear_ps(&lst_b);
-	//system("leaks push_swap");
 	return (0);
 }

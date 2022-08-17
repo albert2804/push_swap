@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/15 17:19:46 by aestraic         ###   ########.fr        #
+#    Updated: 2022/08/17 13:40:22 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = 	utils_libft.c\
 		push.c\
 		input.c
 
-INPUT = 1
+INPUT = 1 2 3 5 4
 
 OBJ  = $(SRC:.c=.o)
 
