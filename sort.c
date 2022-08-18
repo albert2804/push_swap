@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:36:40 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 14:37:03 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/18 17:19:49 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 {
 	int	*max_values;
 
-	while ((*lst_b)->next)
+	// while ((*lst_b)->next)
+	while ((*lst_b))
 	{
 		stats->count_max_val = count_descending_max_values(*lst_b);
 		max_values = descending_max_values(*lst_b);
@@ -58,8 +59,11 @@ void	sortpivgroup(t_list_ps **lst_a, t_list_ps **lst_b, t_status *stats)
 			p_val(lst_a, lst_b, max_values, stats);
 		free(max_values);
 	}
-	if (*lst_b)
-		push_a(lst_a, lst_b, stats->p_f);
+	if ((*lst_b))
+	{
+	 	stats->op_c = stats->op_c + push_a(lst_a, lst_b, stats->p_f);
+		ft_lstclear_ps(lst_b);
+	}
 }
 
 void	sort_small_stack(t_list_ps **lst_a, t_status *stats)

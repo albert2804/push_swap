@@ -6,11 +6,28 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:21:18 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 18:54:50 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/18 18:35:46 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+
+int	execute_cmds_and_error(char *line, t_list_ps **lst_a, t_list_ps **lst_b)
+{
+	int	i;
+
+	i = 1;
+	if (line)
+		i = commands(line, lst_a, lst_b);
+	if (i == 0)
+	{
+		write(2, "Error\n", 6);
+		ft_lstclear_ps(lst_a);
+		ft_lstclear_ps(lst_b);
+		return (0);
+	}
+	return (i);
+}
 
 /*
 reads the instructions and executes the commands. 
@@ -25,34 +42,22 @@ int	read_instructions(t_list_ps **lst_a, t_list_ps **lst_b)
 	int		i;
 	int		j;
 
-	i = 0;
-	j = 0;
+	i = 1;
+	j = 1;
 	line = NULL;
 	line = get_next_line(0);
-	if (line)
-		i = commands(line, lst_a, lst_b);
+	i = execute_cmds_and_error(line, lst_a, lst_b);
 	if (i == 0)
-	{
-		write(2, "Error\n", 6);
-		ft_lstclear_ps(lst_a);
-		//ft_lstclear_ps(lst_b);
-		return (0);
-	}
+		return (2);
 	while (line != NULL)
 	{
 		free (line);
 		line = get_next_line(0);
-		if (line)
-			i = commands(line, lst_a, lst_b);
+		i = execute_cmds_and_error(line, lst_a, lst_b);
 		if (i == 0)
-		{
-			write(2, "Error\n", 6);
-			ft_lstclear_ps(lst_a);
-			//ft_lstclear_ps(lst_b);
-			return (0);
-		}
+			return (2);
 	}
-	j = sort_check(*lst_a);
+	j = sort_check(*lst_a, *lst_b);
 	return (j);
 }
 
@@ -92,15 +97,20 @@ int	main(int argc, char **argv)
 
 	lst_a = NULL;
 	lst_b = NULL;
-	if ((argc == 1) || check_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
+	if (argc == 1)
 		exit(0);
-	lst_a = read_in(lst_a, argc, argv);
-	printlist(lst_a);
-	i = read_instructions(&lst_a, &lst_b);
-	if (i == 1)
-		write (1, "OK", 2);
+	if (double_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
+		write(2, "Error\n", 6);
 	else
-		write (1, "KO", 2);
-	ft_lstclear_ps(&lst_a);
-	ft_lstclear_ps(&lst_b);
+	{
+		lst_a = read_in(lst_a, argc, argv);
+		lst_a = index_list(lst_a);
+		i = read_instructions(&lst_a, &lst_b);
+		if (i == 0)
+			write (1, "KO", 2);
+		else if (i == 1)
+			write (1, "OK", 2);
+		ft_lstclear_ps(&lst_a);
+		ft_lstclear_ps(&lst_b);
+	}
 }

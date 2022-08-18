@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 14:19:44 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/18 18:35:19 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,17 @@ hadnles errors like letters or an already sorted stack,
 l is shoort for lst_a
 h is short for head which got sourced out bc of norminette
 */
-int	check_wrong_or_sorted(int n, char **a, t_list_ps *l, t_list_ps *h)
+int	double_wrong_or_sorted(int n, char **a, t_list_ps *l, t_list_ps *h)
 {
 	t_list_ps	*tmp;
 
 	tmp = NULL;
 	l = read_in(l, n, a);
-	if (l == NULL || sort_check(l) == 1)
-		return (1);
+	if (sort_check(l, tmp) == 1)
+		return (0);
 	tmp = l;
 	h = l;
-	while (h->next)
+	while (h && h->next && l)
 	{
 		l = h->next;
 		while (l)

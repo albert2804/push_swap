@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:31:15 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 18:50:58 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/18 18:38:55 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,19 @@ int	*descending_max_values(t_list_ps *lst_b)
 /*
 checks if lst_a is sorted
 */
-int	sort_check(t_list_ps *lst_a)
+int	sort_check(t_list_ps *lst_a, t_list_ps *lst_b)
 {
-	while (lst_a->next != NULL)
+	if (lst_a && !lst_b)
 	{
-		if (lst_a->content > lst_a->next->content)
-			return (0);
-		lst_a = lst_a->next;
+		while (lst_a->next != NULL)
+		{
+			if (lst_a->content > lst_a->next->content && \
+			lst_a->content == lst_a->next->content)
+				return (0);
+			lst_a = lst_a->next;
+		}
+		return (1);
 	}
-	return (1);
+	else
+		return (0);
 }
