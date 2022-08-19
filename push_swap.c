@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/18 18:18:55 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/19 12:53:23 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ int	main(int argc, char **argv)
 	t_status	*stats;
 	int			a;
 
-	if ((argc == 1) || double_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
+	if (argc == 1)
 		exit(0);
+	else if (double_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
+	{
+		write (2, "Error\n", 6);
+		exit(0);
+	}
 	a = optimal_pivot_value(argv, argc, 0);
 	lst_a = NULL;
 	lst_b = NULL;

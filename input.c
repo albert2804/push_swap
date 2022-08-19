@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/18 18:35:19 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:38:56 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str)
 	while (split_str[i] != NULL)
 	{
 		if (ft_strisdigit(split_str[i]) == 1 && ft_atoi(split_str[i]) < INT_MAX \
-		&& ft_atoi(split_str[i]) > INT_MIN)
+		&& ft_atoi(split_str[i]) > INT_MIN && ft_strlen(split_str[i]) != 0)
 		{
 			elem = ft_atoi(split_str[i]);
 			new_node = ft_lstnew_ps(elem, 0);
@@ -82,9 +82,12 @@ t_list_ps	*read_in(t_list_ps *lst_a, int nbr_arg, char **argv)
 	while (++i < nbr_arg)
 	{
 		lst_a = build_stack_from_argv(lst_a, argv[i]);
-		if (lst_a == NULL)
+		if (ft_strlen(argv[i]) == 0 || lst_a == NULL)
+		{
+			ft_lstclear_ps(&lst_a);
 			break ;
-	}
+		}
+	}		
 	return (lst_a);
 }
 
@@ -99,11 +102,13 @@ int	double_wrong_or_sorted(int n, char **a, t_list_ps *l, t_list_ps *h)
 
 	tmp = NULL;
 	l = read_in(l, n, a);
+	if (l == NULL)
+		return (1);
 	if (sort_check(l, tmp) == 1)
 		return (0);
 	tmp = l;
 	h = l;
-	while (h && h->next && l)
+	while (l && h && h->next)
 	{
 		l = h->next;
 		while (l)

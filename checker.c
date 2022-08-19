@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:21:18 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/18 18:35:46 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/19 13:03:52 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,11 @@ int	main(int argc, char **argv)
 	lst_b = NULL;
 	if (argc == 1)
 		exit(0);
-	if (double_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
+	else if (double_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
+	{
 		write(2, "Error\n", 6);
+		exit(0);
+	}
 	else
 	{
 		lst_a = read_in(lst_a, argc, argv);
