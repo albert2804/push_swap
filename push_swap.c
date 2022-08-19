@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 12:44:33 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/19 12:53:23 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/19 14:21:21 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	main(int argc, char **argv)
 	stats->p_f = 1;
 	sort(&lst_a, &lst_b, stats, 0);
 	free (stats);
-	// printlist(lst_a);
-	// printlist(lst_b);
 	ft_lstclear_ps(&lst_a);
 	ft_lstclear_ps(&lst_b);
 	return (0);

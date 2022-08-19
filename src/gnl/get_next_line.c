@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:17:37 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 15:59:53 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/19 15:25:00 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ char	*ft_strdup_gnl(char *s)
 void	read_into_buffer(int fd, char **buffer, int *a)
 {
 	char	*read_str;
-	int		buffersize;
 
-	buffersize = 20;
-	read_str = malloc(buffersize * sizeof(char) + 1);
-	*a = read(fd, read_str, buffersize);
+	read_str = malloc(BUFFER_SIZE * sizeof(char) + 1);
+	*a = read(fd, read_str, BUFFER_SIZE);
 	read_str[*a] = '\0';
 	if (*a > 0)
 		*buffer = ft_strjoin_gnl(*buffer, read_str, -1, -1);
@@ -100,20 +98,21 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*buffer = NULL;
 	int			a;
-	int			buffersize;
 
-	buffersize = 20;
 	line = NULL;
 	a = 1;
-	if (buffersize <= 0 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	while (a > 0)
 	{
 		if (ft_check_for_newline_in_buffer(buffer) != -1)
 			break ;
 		read_into_buffer(fd, &buffer, &a);
-		if (ft_strlen_gnl(buffer) == 0 && buffer)
+		if (buffer && ft_strlen_gnl(buffer) == 0)
+		{
 			free (buffer);
+			return (NULL);
+		}
 	}
 	if (a == 0 && ft_strlen_gnl(buffer) == 0)
 		return (line);
