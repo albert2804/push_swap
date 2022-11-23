@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:29:02 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 14:02:04 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:56:01 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	find_min_int(int *int_list, int max_c, int min_c)
 	{
 		if (int_list[i] < min_val)
 		{	
-			pos = i;
+			pos = 2 + i;
 			min_val = int_list[i];
 		}
 		i ++;
 	}
 	free(int_list);
-	return (pos + min_c);
+	return (pos);
 }
 
 //Function to save all operation_counts in a integer array
@@ -56,12 +56,12 @@ int	optimal_pivot_value(char **argv, int argc, int i)
 		lst_a = index_list(lst_a);
 		stats = init_struct(lst_a);
 		stats->piv_c = 2 + i;
-		sort(&lst_a, &lst_b, stats, 0);
+		sort(&lst_a, &lst_b, stats, 1);
 		op_counts[i++] = stats->op_c;
 		free (stats);
 		ft_lstclear_ps(&lst_a);
 		ft_lstclear_ps(&lst_b);
 	}
-	opt_op_count = find_min_int(op_counts, 30, 2);
+	opt_op_count = find_min_int(op_counts, 30, 1);
 	return (opt_op_count);
 }

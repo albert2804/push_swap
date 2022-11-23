@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/19 15:57:30 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:47:08 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,23 @@ int	double_wrong_or_sorted(int n, char **a, t_list_ps *l, t_list_ps *h)
 	tmp = NULL;
 	l = read_in(l, n, a);
 	if (l == NULL)
-		return (1);
-	if (sort_check(l, tmp) == 1)
 	{
-		ft_lstclear_ps(&l);
-		return (0);
+		write (2, "Error\n", 6);
+		return (1);
 	}
 	tmp = l;
 	h = l;
-	if (check_for_doubles(l, h, tmp) == 1)
+	if (check_for_doubles(l, h) == 1)
+	{
+		write (2, "Error\n", 6);
+		ft_lstclear_ps(&l);
 		return (1);
+	}
+	if (sort_check(l, NULL) == 1)
+	{
+		ft_lstclear_ps(&l);
+		return (1);
+	}
 	ft_lstclear_ps(&tmp);
 	return (0);
 }

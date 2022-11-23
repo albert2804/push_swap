@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 09:31:15 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/19 12:48:22 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:56:59 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	sort_check(t_list_ps *lst_a, t_list_ps *lst_b)
 	{
 		while (lst_a->next != NULL)
 		{
-			if (lst_a->content >= lst_a->next->content)
+			if (lst_a->content > lst_a->next->content)
 				return (0);
 			lst_a = lst_a->next;
 		}

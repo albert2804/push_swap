@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/19 15:36:23 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:34:29 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char		**read_input(char *str);
 int			double_wrong_or_sorted(int n, char **a, t_list_ps *l, t_list_ps *h);
 int			ft_strisdigit(char *str);
 void		ft_free_split(char **str);
-int			check_for_doubles(t_list_ps *l, t_list_ps *h, t_list_ps *tmp);
+int			check_for_doubles(t_list_ps *l, t_list_ps *h);
 
 //LIBFT-FUNCTIONS
 void		ft_lstadd_front_ps(t_list_ps **lst, t_list_ps *new);
