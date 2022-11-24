@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/11/24 14:33:49 by aestraic         ###   ########.fr        #
+#    Updated: 2022/11/24 16:03:18 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,26 +57,26 @@ OBJ_B = $(SRC_B:.c=.o)
 
 HEADER_PATH = header
 LIB_PATH = lib
+LIB = $(LIB_PATH)/libft.a
 SRC_PATH = src
 OBJ_PATH = obj
 C_FLAGS = -Wall -Wextra -Werror
 
-all:   library obj $(NAME)
-bonus: library obj_b $(BONUS)
 
-obj: $(OBJ)
-obj_b: $(OBJ_B)
+all:    $(NAME)
+bonus:  $(BONUS)
 
 %.o : %.c
 	gcc -g $(C_FLAGS) -I$(HEADER_PATH) -c $^
 	
-$(NAME): $(OBJ)
+$(NAME): $(LIB) $(OBJ)
 	gcc -g $(C_FLAGS) -I$(HEADER_PATH) $(OBJ) -L$(LIB_PATH) -lft -o $(NAME)
 
-$(BONUS): $(OBJ_B)
+$(BONUS): $(LIB) $(OBJ_B)
 	gcc -g $(C_FLAGS) -I$(HEADER_PATH) $(OBJ_B) -L$(LIB_PATH) -lft -o $(BONUS)
 
-library:
+$(LIB):
+	@mkdir -p $(LIB_PATH)
 #	@echo MAKE LIBFT
 	@make all -C	$(SRC_PATH)/libft
 	
