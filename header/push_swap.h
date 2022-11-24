@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/23 17:34:29 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:45:48 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 //STRUCTS
 typedef struct s_list_ps
 {
-	int					content;
+	long				content;
 	int					index;
 	struct s_list_ps	*next;
 }					t_list_ps;

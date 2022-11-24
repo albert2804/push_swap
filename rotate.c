@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:16:23 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/23 14:39:06 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:36:46 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	rotate_a(t_list_ps **lst, int print_flag)
 	t_list_ps	*first;
 	t_list_ps	*tmp;
 
-	if ((*lst)->next && (*lst))
+	if ((*lst) && (*lst)->next)
 	{
 		tmp = *lst;
 		first = ft_lstnew_ps((*lst)->content, (*lst)->index);
@@ -35,7 +35,7 @@ int	rotate_b(t_list_ps **lst, int print_flag)
 	t_list_ps	*first;
 	t_list_ps	*tmp;
 
-	if ((*lst)->next && (*lst))
+	if ((*lst) && (*lst)->next)
 	{
 		tmp = *lst;
 		first = ft_lstnew_ps((*lst)->content, (*lst)->index);
@@ -53,7 +53,7 @@ int	rotate_rev_a(t_list_ps **lst, int print_flag)
 	t_list_ps	*last;
 	t_list_ps	*temp;
 
-	if ((*lst)->next && (*lst))
+	if ((*lst) && (*lst)->next)
 	{
 		last = ft_lstlast_ps(*lst);
 		temp = *lst;
@@ -74,7 +74,7 @@ int	rotate_rev_b(t_list_ps **lst, int print_flag)
 	t_list_ps	*last;
 	t_list_ps	*temp;
 
-	if ((*lst)->next && (*lst))
+	if ((*lst) && (*lst)->next)
 	{
 		last = ft_lstlast_ps(*lst);
 		temp = *lst;

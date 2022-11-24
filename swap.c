@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:16:32 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/17 17:35:42 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:42:15 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	swap_a(t_list_ps **lst, int print_flag)
 	t_list_ps	*node1;
 	t_list_ps	*node2;
 
-	if ((*lst)->next)
+	if ((*lst) && (*lst)->next)
 	{
 		node1 = (*lst);
 		node2 = (*lst)->next;
@@ -46,7 +46,7 @@ int	swap_b(t_list_ps **lst, int print_flag)
 	t_list_ps	*node1;
 	t_list_ps	*node2;
 
-	if ((*lst)->next)
+	if ((*lst) && (*lst)->next)
 	{
 		node1 = (*lst);
 		node2 = (*lst)->next;

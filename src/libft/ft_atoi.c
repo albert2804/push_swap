@@ -6,17 +6,17 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:25:09 by aestraic          #+#    #+#             */
-/*   Updated: 2022/07/06 17:34:32 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:00:29 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
-	int	r;
-	int	vz;
-	int	i;
+	long	r;
+	int		vz;
+	int		i;
 
 	i = 0;
 	r = 0;

@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 14:22:07 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/23 18:47:08 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:02:25 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_list_ps	*build_stack_from_argv(t_list_ps *lst_a, char *str)
 {
 	t_list_ps	*new_node;
 	char		**split_str;
-	int			elem;
+	long		elem;
 	int			i;
 
 	i = 0;

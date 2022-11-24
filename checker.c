@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:21:18 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/19 13:03:52 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 12:38:30 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,16 @@ int	read_instructions(t_list_ps **lst_a, t_list_ps **lst_b)
 	line = get_next_line(0);
 	i = execute_cmds_and_error(line, lst_a, lst_b);
 	if (i == 0)
-		return (2);
+		return (free(line),2);
 	while (line != NULL)
 	{
 		free (line);
 		line = get_next_line(0);
 		i = execute_cmds_and_error(line, lst_a, lst_b);
 		if (i == 0)
-			return (2);
+			return (free(line), 2);
 	}
+	free(line);
 	j = sort_check(*lst_a, *lst_b);
 	return (j);
 }
@@ -101,7 +102,7 @@ int	main(int argc, char **argv)
 		exit(0);
 	else if (double_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
 	{
-		write(2, "Error\n", 6);
+		ft_lstclear_ps(&lst_a);
 		exit(0);
 	}
 	else
