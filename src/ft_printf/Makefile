@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/11/24 13:59:58 by aestraic         ###   ########.fr        #
+#    Updated: 2022/11/24 16:07:31 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,6 @@ all: $(NAME)
 
 $(NAME):$(COMPILED)
 	@ar -rucv $(LIB_PATH)/$(NAME) $^
-
-move:
-	@mv $(COMPILED)$^ $(OBJ_PATH)
 
 clean:
 	@rm -f $(COMPILED)
