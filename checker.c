@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:21:18 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/24 13:39:31 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:59:03 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	read_instructions(t_list_ps **lst_a, t_list_ps **lst_b)
 
 	i = 1;
 	j = 1;
-	line = NULL;
 	line = get_next_line(0);
 	i = execute_cmds_and_error(line, lst_a, lst_b);
 	if (i == 0)
@@ -65,27 +64,27 @@ int	read_instructions(t_list_ps **lst_a, t_list_ps **lst_b)
 int	commands(char *line, t_list_ps **lst_a, t_list_ps **lst_b)
 {
 	if (ft_strncmp("ra\n", line, 3) == 0)
-		return (rotate_a(lst_a, 0));
+		return (rotate_a(lst_a, 0), 1);
 	if (ft_strncmp("rb\n", line, 3) == 0)
-		return (rotate_b(lst_b, 0));
+		return (rotate_b(lst_b, 0), 1);
 	else if (ft_strncmp("rra\n", line, 4) == 0)
-		return (rotate_rev_a(lst_a, 0));
+		return (rotate_rev_a(lst_a, 0), 1);
 	else if (ft_strncmp("rrb\n", line, 4) == 0)
-		return (rotate_rev_b(lst_b, 0));
+		return (rotate_rev_b(lst_b, 0), 1);
 	else if (ft_strncmp("sa\n", line, 3) == 0)
-		return (swap_a(lst_a, 0));
+		return (swap_a(lst_a, 0), 1);
 	else if (ft_strncmp("sb\n", line, 3) == 0)
-		return (swap_b(lst_b, 0));
+		return (swap_b(lst_b, 0), 1);
 	else if (ft_strncmp("pa\n", line, 3) == 0)
-		return (push_a(lst_a, lst_b, 0));
+		return (push_a(lst_a, lst_b, 0), 1);
 	else if (ft_strncmp("pb\n", line, 3) == 0)
-		return (push_b(lst_a, lst_b, 0));
+		return (push_b(lst_a, lst_b, 0), 1);
 	else if (ft_strncmp("ss\n", line, 3) == 0)
-		return (sswap(lst_a, lst_b, 0));
+		return (sswap(lst_a, lst_b, 0), 1);
 	else if (ft_strncmp("rr\n", line, 3) == 0)
-		return (rrab(lst_a, lst_b, 0));
+		return (rrab(lst_a, lst_b, 0), 1);
 	else if (ft_strncmp("rrr\n", line, 4) == 0)
-		return (rrrab(lst_a, lst_b, 0));
+		return (rrrab(lst_a, lst_b, 0), 1);
 	else
 		return (0);
 }

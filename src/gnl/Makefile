@@ -6,7 +6,7 @@
 #    By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 13:20:07 by aestraic          #+#    #+#              #
-#    Updated: 2022/08/17 16:00:25 by aestraic         ###   ########.fr        #
+#    Updated: 2022/11/24 13:59:50 by aestraic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ_PATH = ../../obj
 all: $(NAME)
 		
 %.o: %.c
-	cc -Wall -Wextra -Werror -I $(HEADER_PATH) -c $^
+	cc -g -Wall -Wextra -Werror -I $(HEADER_PATH) -c $^
 
 $(NAME):$(COMPILED)
 	@ar -rucv $(LIB_PATH)/$(NAME) $^
