@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:21:18 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/24 12:38:30 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:39:31 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	read_instructions(t_list_ps **lst_a, t_list_ps **lst_b)
 	line = get_next_line(0);
 	i = execute_cmds_and_error(line, lst_a, lst_b);
 	if (i == 0)
-		return (free(line),2);
+		return (free(line), 2);
 	while (line != NULL)
 	{
 		free (line);
@@ -101,10 +101,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		exit(0);
 	else if (double_wrong_or_sorted(argc, argv, NULL, NULL) == 1)
-	{
 		ft_lstclear_ps(&lst_a);
-		exit(0);
-	}
 	else
 	{
 		lst_a = read_in(lst_a, argc, argv);
@@ -117,4 +114,6 @@ int	main(int argc, char **argv)
 		ft_lstclear_ps(&lst_a);
 		ft_lstclear_ps(&lst_b);
 	}
+	ft_waitforpipe();
+	exit (0);
 }

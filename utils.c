@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/23 16:54:15 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:39:50 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ int	list_count(t_list_ps *lst)
 	return (i);
 }
 
-void	print_status(t_status *stats)
+void	ft_waitforpipe(void)
 {
-	ft_printf("List A Count: %d\n", stats->lsta_c);
-	ft_printf("Pivot Count: %d\n", stats->piv_c);
-	ft_printf("Operations Count: %d\n", stats->op_c);
-	ft_printf("PrintFlag: %d\n", stats->p_f);
+	int	i;
+
+	i = 0;
+	while (i < INT_MAX / 3)
+		i++;
 }
 
 /*

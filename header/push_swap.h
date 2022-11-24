@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:26:10 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/24 11:45:48 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:37:18 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int			check_for_push(t_list_ps *lst_b);
 void		free_list(t_list_ps *lst);
 void		ft_lstclear_ps(t_list_ps **lst);
 void		ft_lstdelone_ps(t_list_ps *lst);
+void		ft_waitforpipe(void);
 
 //PIVOT
 int			*pivotvalues(t_status *stats);
