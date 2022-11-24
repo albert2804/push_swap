@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:30:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/24 13:39:50 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:06:25 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_waitforpipe(void)
 	int	i;
 
 	i = 0;
-	while (i < INT_MAX / 3)
+	while (i < INT_MAX / 5)
 		i++;
 }
 

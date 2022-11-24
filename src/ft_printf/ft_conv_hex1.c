@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:07:47 by aestraic          #+#    #+#             */
-/*   Updated: 2022/11/24 12:03:02 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:24:15 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	ft_conv_hex1(va_list arg_list, int k)
 		i++;
 	}
 	s = ft_reverse_string_hex(s);
+	i = ft_strlen(s);
 	ft_putstr_fd(s, 1);
-	return (ft_strlen(s));
+	free(s);
+	return (i);
 }

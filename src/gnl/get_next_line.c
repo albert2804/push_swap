@@ -6,7 +6,7 @@
 /*   By: aestraic <aestraic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:17:37 by aestraic          #+#    #+#             */
-/*   Updated: 2022/08/19 15:25:00 by aestraic         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:10:24 by aestraic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strdup_gnl(char *s)
 
 	i = 0;
 	n = ft_strlen_gnl(s);
+	if (!n)
+		return (NULL);
 	s_cpy = malloc(n * sizeof(char) + 1);
 	if (!s_cpy)
 	{
